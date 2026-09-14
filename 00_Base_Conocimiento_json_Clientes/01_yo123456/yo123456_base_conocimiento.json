@@ -1,0 +1,108 @@
+{
+    "metadata": {
+        "version": "3.2",
+        "estado_servicio": "activo",
+        "cliente_id": "",
+        "fecha_alta": "2026-06-16",
+        "fecha_ultima_actualizacion": "2026-06-16",
+        "autor": "AURIA_2 — Onboarding Automático",
+        "plan_servicio": "gratuito_individual"
+    },
+    "perfil_usuario": {
+        "nombre_completo": "Yo123456",
+        "apodo_preferido": "",
+        "tratamiento": "vos",
+        "tipo_perfil": "individual",
+        "segmento": "A_individual",
+        "idiomas": [
+            "español"
+        ],
+        "zona_horaria": "America/Argentina/Buenos_Aires",
+        "actividades_y_hobbies": "",
+        "vinculos_y_entorno": {
+            "familia": "",
+            "amigos": "",
+            "mascotas": "",
+            "fechas_importantes": ""
+        }
+    },
+    "contacto": {
+        "email_principal": "a_nu_ar@hotmail.com",
+        "email_servicio": "auria.desarrollo@gmail.com",
+        "celular_whatsapp": "+5491123302727",
+        "telegram_chat_id": "",
+        "nota_seguridad": "La App Password va ÚNICAMENTE en el archivo .env — nunca en este JSON"
+    },
+    "esfera_profesional": {
+        "rol": "",
+        "tipo_empleo": "",
+        "empresa_o_proyecto": "FER Studio\nAUR+IA",
+        "companeros_clave": "",
+        "social_extra": "",
+        "obra_extra": "",
+        "vida_extra": "",
+        "contactos_prioritarios": [],
+        "dominios_prioritarios": [],
+        "palabras_clave_urgentes": []
+    },
+    "campos_personalizados": {
+        "cat1_urgente": {
+            "situaciones_adicionales": "",
+            "remitentes_siempre_urgentes": "",
+            "dominios_siempre_urgentes": [],
+            "palabras_clave_propias": []
+        },
+        "cat2_familia_amigos": {
+            "contactos": ""
+        },
+        "cat3_turnos_vencimientos": {
+            "vencimientos_especificos": "",
+            "remitentes_turnos": []
+        },
+        "cat4_laboral_inmediato": {
+            "clientes_vip": "",
+            "remitentes_jefes": []
+        },
+        "cat9_spam_bloqueo": {
+            "remitentes_bloqueados": "",
+            "dominios_bloqueados": []
+        }
+    },
+    "canales_notificacion": {
+        "whatsapp_habilitado": false,
+        "telegram_habilitado": false,
+        "email_habilitado": true,
+        "canal_preferido": "email",
+        "preferencia_whatsapp": "",
+        "urgentes_inmediatas": true
+    },
+    "plan_especial_jubilado": {
+        "es_jubilado": "",
+        "comentario": "",
+        "tres_reportes_gratis": false
+    },
+    "logica_de_clasificacion": {
+        "cat1_modo": "",
+        "cat1_tono": "",
+        "cat2_modo": "",
+        "cat2_tono": "",
+        "cat3_modo": "",
+        "cat3_tono": "",
+        "cat4_modo": "",
+        "cat4_tono": "",
+        "cat5_modo": "",
+        "cat5_tono": "",
+        "cat6_modo": "",
+        "cat6_tono": "",
+        "cat7_modo": "",
+        "cat7_tono": "",
+        "cat8_modo": "",
+        "cat8_tono": "",
+        "cat9_modo": ""
+    },
+    "idea_patron_fundamental": {
+        "concepto": "Inteligencia Empática Absoluta",
+        "regla_de_oro": "AURelia y AURhelios deben ser totalmente empáticos, amistosos y serviciales. La frialdad tecnológica está prohibida.",
+        "mision_postal": "Transformar la gestión de correos en una experiencia de acompañamiento y alivio para el cliente."
+    }
+}

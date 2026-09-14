@@ -1,0 +1,3015 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario VyO</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_Cuestionario_VyO/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_Cuestionario_VyO/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_Cuestionario_VyO/favicon-16x16.png">
+    <link rel="manifest" href="favicon_Cuestionario_VyO/site.webmanifest">
+    <link rel="mask-icon" href="favicon_Cuestionario_VyO/safari-pinned-tab.svg" color="#4a7ba7">
+    <link rel="shortcut icon" href="favicon_Cuestionario_VyO/favicon.ico">
+    <meta name="msapplication-TileColor" content="#4a7ba7">
+    <meta name="msapplication-config" content="favicon_Cuestionario_VyO/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        :root {
+            --dorado: #D4AF37;
+            --azul-aur: #0047AB;
+            --verde-estilo: #2E7D32;
+            --blanco: #ffffff;
+
+            /* ── Colores de las 9 categorías ── */
+            --cat1-color: #6A0DAD;
+            --cat1-bg: #f5f0ff;
+            --cat1-border: #9b59b6;
+            --cat2-color: #1a7a1a;
+            --cat2-bg: #f0fff0;
+            --cat2-border: #2E7D32;
+            --cat3-color: #1a7a1a;
+            --cat3-bg: #f0fff0;
+            --cat3-border: #2E7D32;
+            --cat4-color: #1a7a1a;
+            --cat4-bg: #f0fff0;
+            --cat4-border: #2E7D32;
+            --cat5-color: #b35900;
+            --cat5-bg: #fff8f0;
+            --cat5-border: #e67e22;
+            --cat6-color: #b35900;
+            --cat6-bg: #fff8f0;
+            --cat6-border: #e67e22;
+            --cat7-color: #1a4a8a;
+            --cat7-bg: #f0f4ff;
+            --cat7-border: #3498db;
+            --cat8-color: #1a4a8a;
+            --cat8-bg: #f0f4ff;
+            --cat8-border: #3498db;
+            --cat9-color: #8B0000;
+            --cat9-bg: #fff0f0;
+            --cat9-border: #e74c3c;
+
+            /* ── Campos personalizados ── */
+            --campo-nuevo-bg: #fffde7;
+            --campo-nuevo-border: #f9a825;
+            --campo-nuevo-titulo: #e65100;
+            --campo-nuevo-texto: #5d4037;
+            --campo-nuevo-placeholder: #bcaaa4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f3;
+            margin: 0;
+            padding: 10px;
+            color: #333;
+        }
+
+        @media (min-width: 600px) {
+            body {
+                padding: 20px;
+            }
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--blanco);
+            padding: 20px 15px;
+            /* En celulares: 20px arriba/abajo, 15px a los lados */
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (min-width: 600px) {
+            .container {
+                padding: 40px;
+                /* En pantallas más grandes: 40px simétricos en todos los lados */
+            }
+        }
+
+        .header-vyo {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .header-vyo {
+                margin-bottom: 40px;
+                margin-top: 50px;
+            }
+        }
+
+        .titulo-entrada {
+            .titulo-entrada {
+                font-size: 2.2rem;
+                color: #222;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                font-weight: 800;
+                line-height: 1.2;
+                /* Recomendado para títulos de varias líneas */
+            }
+
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: #222;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 800;
+        }
+
+        .vyo-main {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            margin-top: -10px;
+            flex-wrap: wrap;
+        }
+
+        .v-vyo {
+            font-size: 2.5rem;
+            color: var(--dorado);
+            font-weight: bold;
+            letter-spacing: -2px;
+        }
+
+        @media (min-width: 600px) {
+            .v-vyo {
+                font-size: 4rem;
+                letter-spacing: -4px;
+            }
+        }
+
+        .y-vyo {
+            font-size: 1.3rem;
+            color: #666;
+            font-weight: bold;
+            margin: 0 -2px;
+        }
+
+        @media (min-width: 600px) {
+            .y-vyo {
+                font-size: 1.8rem;
+            }
+        }
+
+        .o-vyo {
+            font-size: 2.5rem;
+            color: var(--azul-aur);
+            font-weight: bold;
+            letter-spacing: -2px;
+        }
+
+        @media (min-width: 600px) {
+            .o-vyo {
+                font-size: 4rem;
+                letter-spacing: -4px;
+            }
+        }
+
+        .sub-vyo {
+            font-size: 1rem;
+            display: block;
+            margin-top: -5px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        @media (min-width: 600px) {
+            .sub-vyo {
+                font-size: 1.2rem;
+                margin-top: -10px;
+            }
+        }
+
+        .intro {
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (min-width: 600px) {
+            .intro {
+                line-height: 1.7;
+                margin-bottom: 40px;
+            }
+        }
+
+        .aviso-recarga {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        @media (min-width: 600px) {
+            .aviso-recarga {
+                padding: 15px;
+                margin-bottom: 25px;
+                font-size: 1rem;
+            }
+        }
+
+        /* ── Selector de Modo Bifurcado ── */
+        .profile-selector-container {
+            margin: 15px 0;
+            background-color: #f8fafc;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        @media (min-width: 600px) {
+            .profile-selector-container {
+                margin: 25px 0;
+                padding: 20px;
+            }
+        }
+
+        .profile-selector-title {
+            font-weight: bold;
+            color: var(--azul-aur);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .profile-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 600px) {
+            .profile-buttons {
+                gap: 15px;
+            }
+        }
+
+        /* ── Estilos de botones: Azul y Dorado ── */
+        .btn-mode {
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 2px solid var(--azul-aur);
+            border-radius: 6px;
+            cursor: pointer;
+            background: var(--blanco);
+            color: var(--azul-aur);
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        @media (min-width: 600px) {
+            .btn-mode {
+                padding: 14px 24px;
+                font-size: 0.95rem;
+                width: auto;
+                max-width: none;
+            }
+        }
+
+        .btn-mode:hover {
+            background: var(--azul-aur);
+            /* Fondo azul al pasar el mouse */
+            color: var(--blanco);
+            /* Texto blanco al pasar el mouse */
+        }
+
+        .btn-mode.active {
+            background: var(--dorado);
+            /* Fondo dorado para el activo */
+            color: var(--blanco);
+            /* Texto blanco para mayor contraste */
+            border-color: var(--dorado);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Estilo para ocultación suave o transición */
+        .personal-subcontainer {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .personal-subcontainer.hidden-mode {
+            display: none;
+        }
+
+        .seccion-card {
+            padding: 18px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @media (min-width: 600px) {
+            .seccion-card {
+                padding: 35px;
+                border-radius: 15px;
+                margin-bottom: 35px;
+            }
+        }
+
+        .vida-bg {
+            background-color: #fffdf2;
+            border-left: 5px solid var(--dorado);
+        }
+
+        .obra-bg {
+            background-color: #f2f7ff;
+            border-left: 5px solid var(--azul-aur);
+        }
+
+        .relacion-bg {
+            background-color: #f2fff4;
+            border-left: 5px solid var(--verde-estilo);
+        }
+
+        @media (min-width: 600px) {
+            .vida-bg {
+                border-left-width: 8px;
+            }
+
+            .obra-bg {
+                border-left-width: 8px;
+            }
+
+            .relacion-bg {
+                border-left-width: 8px;
+            }
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .vida-bg h2 {
+            color: #856404;
+        }
+
+        .obra-bg h2 {
+            color: #003a8c;
+        }
+
+        .relacion-bg h2 {
+            color: #1e5622;
+        }
+
+        .campo-grupo {
+            margin-bottom: 18px;
+        }
+
+        @media (min-width: 600px) {
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+
+            .campo-grupo {
+                margin-bottom: 25px;
+            }
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        @media (min-width: 600px) {
+            label {
+                margin-bottom: 10px;
+            }
+        }
+
+        textarea,
+        select,
+        input[type="email"],
+        input[type="tel"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            box-sizing: border-box;
+            background: #fff;
+        }
+
+        @media (min-width: 600px) {
+
+            textarea,
+            select,
+            input[type="email"],
+            input[type="tel"],
+            input[type="text"] {
+                padding: 15px;
+            }
+        }
+
+        .cat-box {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .cat-box-1 {
+            background-color: var(--cat1-bg);
+            border-left: 4px solid var(--cat1-border);
+        }
+
+        .cat-box-2 {
+            background-color: var(--cat2-bg);
+            border-left: 4px solid var(--cat2-border);
+        }
+
+        .cat-box-3 {
+            background-color: var(--cat3-bg);
+            border-left: 4px solid var(--cat3-border);
+        }
+
+        .cat-box-4 {
+            background-color: var(--cat4-bg);
+            border-left: 4px solid var(--cat4-border);
+        }
+
+        .cat-box-5 {
+            background-color: var(--cat5-bg);
+            border-left: 4px solid var(--cat5-border);
+        }
+
+        .cat-box-6 {
+            background-color: var(--cat6-bg);
+            border-left: 4px solid var(--cat6-border);
+        }
+
+        .cat-box-7 {
+            background-color: var(--cat7-bg);
+            border-left: 4px solid var(--cat7-border);
+        }
+
+        .cat-box-8 {
+            background-color: var(--cat8-bg);
+            border-left: 4px solid var(--cat8-border);
+        }
+
+        .cat-box-9 {
+            background-color: var(--cat9-bg);
+            border-left: 4px solid var(--cat9-border);
+        }
+
+        @media (min-width: 600px) {
+            .cat-box {
+                padding: 25px;
+                margin-bottom: 20px;
+            }
+
+            .cat-box-1,
+            .cat-box-2,
+            .cat-box-3,
+            .cat-box-4,
+            .cat-box-5,
+            .cat-box-6,
+            .cat-box-7,
+            .cat-box-8,
+            .cat-box-9 {
+                border-left-width: 6px;
+            }
+        }
+
+        .urgente-label {
+            color: #8A2BE2;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .campo-personalizado {
+            background-color: var(--campo-nuevo-bg);
+            border: 1px dashed var(--campo-nuevo-border);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 14px;
+        }
+
+        .campo-personalizado-titulo {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--campo-nuevo-titulo);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .campo-personalizado-ejemplos {
+            font-size: 0.85rem;
+            color: var(--campo-nuevo-texto);
+            font-style: italic;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            display: block;
+        }
+
+        .campo-personalizado textarea {
+            font-size: 0.95rem;
+            border: 1px solid var(--campo-nuevo-border);
+            background: #fffef5;
+        }
+
+        .campo-personalizado textarea::placeholder {
+            color: var(--campo-nuevo-placeholder);
+            font-style: italic;
+        }
+
+        @media (min-width: 600px) {
+            .campo-personalizado {
+                padding: 16px 18px;
+                margin-top: 18px;
+            }
+
+            .campo-personalizado-titulo {
+                font-size: 0.97rem;
+            }
+        }
+
+        .seccion-adicional {
+            background-color: #f0f9ff;
+            border: 2px solid #0099cc;
+            border-radius: 12px;
+            padding: 18px 15px;
+            margin-bottom: 20px;
+        }
+
+        .seccion-adicional h2 {
+            color: #005f80;
+            font-size: 1.3rem;
+        }
+
+        .seccion-adicional .campo-grupo label {
+            color: #005f80;
+        }
+
+        @media (min-width: 600px) {
+            .seccion-adicional {
+                padding: 30px 35px;
+                margin-bottom: 35px;
+            }
+
+            .seccion-adicional h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        .seccion-jubilado {
+            background-color: #f5f0ff;
+            border: 2px solid var(--cat1-border);
+            border-radius: 12px;
+            padding: 18px 15px;
+            margin-bottom: 20px;
+        }
+
+        .seccion-jubilado h3 {
+            color: var(--cat1-color);
+            font-size: 1.3rem;
+            text-align: center;
+            color: #6b1f78;
+        }
+
+
+        @media (min-width: 600px) {
+            .seccion-jubilado {
+                padding: 30px 35px;
+                margin-bottom: 35px;
+            }
+
+            .seccion-jubilado h3 {
+                font-size: 1.6rem;
+            }
+        }
+
+        .btn-cargar {
+            /* Mantenemos el color y diseño original */
+            background-color: #D4AF37;
+            /* O el dorado de tu paleta: #d1a638 */
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            /* Mantiene las esquinas redondeadas */
+            font-weight: bold;
+            cursor: pointer;
+
+            /* ÚNICOS CAMBIOS: Achicamos tamaño de caja y texto */
+            padding: 2px 4px;
+            /* Reduce el alto y ancho interno */
+            font-size: 0.7rem;
+            /* Achica la letra para que entre fino */
+            max-width: 85px;
+            /* Limita el ancho del botón */
+            white-space: nowrap;
+            /* Evita que el texto se rompa en varias líneas */
+        }
+
+        .btn-submit {
+            background: var(--azul-aur);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        @media (min-width: 600px) {
+            .btn-submit {
+                padding: 22px;
+                font-size: 1.4rem;
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9rem;
+            padding-bottom: 20px;
+        }
+
+        input[name="clave_aplicacion"]::placeholder {
+            color: #c2bec5;
+            font-style: italic;
+        }
+
+        @media (min-width: 600px) {
+            footer {
+                margin-top: 60px;
+            }
+        }
+
+        .char-counter {
+            text-align: right;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .limit-reached {
+            color: #d9534f !important;
+        }
+
+        .premium-alert {
+            display: none;
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            border: 1px solid #ffeeba;
+        }
+
+        [class^="cat-titulo-"] {
+            font-weight: 800;
+            font-size: 1.05em;
+        }
+
+        .cat-titulo-1 {
+            color: var(--cat1-color);
+        }
+
+        .cat-titulo-2 {
+            color: var(--cat2-color);
+        }
+
+        .cat-titulo-3 {
+            color: var(--cat3-color);
+        }
+
+        .cat-titulo-4 {
+            color: var(--cat4-color);
+        }
+
+        .cat-titulo-5 {
+            color: var(--cat5-color);
+        }
+
+        .cat-titulo-6 {
+            color: var(--cat6-color);
+        }
+
+        .cat-titulo-7 {
+            color: var(--cat7-color);
+        }
+
+        .cat-titulo-8 {
+            color: var(--cat8-color);
+        }
+
+        .cat-titulo-9 {
+            color: var(--cat9-color);
+        }
+
+        /* ── Soporte de Perillas y Transparencia Dinámica ── */
+        .switch-control {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+
+        .switch-control input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-toggle {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider-toggle:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .switch-control input:checked+.slider-toggle {
+            background-color: var(--azul-aur);
+        }
+
+        .switch-control input:checked+.slider-toggle:before {
+            transform: translateX(22px);
+        }
+
+        .cat-deshabilitada {
+            opacity: 0.45;
+            background-color: #f5f5f5 !important;
+            border-left-color: #ccc !important;
+        }
+
+        .modal-exito {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .55);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .modal-contenido {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 25px 20px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 0, 0, .25);
+            animation: aparece .35s;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        @keyframes aparece {
+            from {
+                opacity: 0;
+                transform: scale(.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-personajes {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .modal-personajes img {
+            width: 80px;
+            height: auto;
+        }
+
+        .modal-contenido h2 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .modal-contenido h3 {
+            font-size: 20px;
+            color: #4A7BA7;
+            margin-bottom: 15px;
+        }
+
+        .modal-contenido p {
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .modal-contenido button {
+            margin-top: 20px;
+            background: #4A7BA7;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: .25s;
+            width: 100%;
+        }
+
+        .modal-contenido button:hover {
+            transform: scale(1.02);
+        }
+
+        @media (min-width: 600px) {
+            .modal-contenido {
+                padding: 40px;
+            }
+
+            .modal-personajes {
+                gap: 30px;
+                margin-bottom: 20px;
+            }
+
+            .modal-personajes img {
+                width: 110px;
+            }
+
+            .modal-contenido h2 {
+                font-size: 34px;
+            }
+
+            .modal-contenido h3 {
+                font-size: 26px;
+                margin-bottom: 20px;
+            }
+
+            .modal-contenido p {
+                font-size: 18px;
+            }
+
+            .modal-contenido button {
+                margin-top: 25px;
+                padding: 14px 32px;
+                font-size: 17px;
+                width: auto;
+            }
+
+            .modal-contenido button:hover {
+                transform: scale(1.04);
+            }
+        }
+
+        /* ===================================================== */
+        /* PANTALLA INICIAL AUR+IA */
+        /* ===================================================== */
+
+        .pantalla-inicial {
+            text-align: center;
+            padding: 20px 15px;
+        }
+
+        .pantalla-inicial h3 {
+            color: #2F5F8F;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pantalla-inicial p {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 600px) {
+            .pantalla-inicial {
+                padding: 40px 25px;
+            }
+
+            .pantalla-inicial h3 {
+                font-size: 2rem;
+            }
+
+            .pantalla-inicial p {
+                font-size: 1.05rem;
+                margin-bottom: 35px;
+            }
+        }
+
+        .opcion-manual,
+        .opcion-auto {
+            border: 2px solid #D9E5F2;
+            border-radius: 18px;
+            padding: 18px 15px;
+            margin: 15px auto;
+            max-width: 560px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+            transition: .25s;
+        }
+
+        .opcion-manual {
+            background: #f4eac7;
+        }
+
+        .opcion-auto {
+            background: #c9e5f5;
+        }
+
+        @media (min-width: 600px) {
+
+            .opcion-manual,
+            .opcion-auto {
+                padding: 28px;
+                margin: 25px auto;
+            }
+        }
+
+
+        .opcion-manual:hover,
+        .opcion-auto:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, .15);
+        }
+
+        .opcion-manual h4 {
+            color: #C9931C;
+            font-size: 1.2rem;
+        }
+
+        .opcion-auto h4 {
+            color: #2F5F8F;
+            font-size: 1.2rem;
+        }
+
+        .opcion-manual button,
+        .opcion-auto button {
+            border: none;
+            border-radius: 14px;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .25s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 600px) {
+
+            .opcion-manual h4,
+            .opcion-auto h4 {
+                font-size: 1.4rem;
+            }
+
+            .opcion-manual button,
+            .opcion-auto button {
+                padding: 14px 34px;
+                font-size: 1rem;
+                width: auto;
+            }
+        }
+
+        /* Botón MANUAL */
+
+        .opcion-manual button {
+            background: #dfbd38ea;
+            color: rgb(111, 140, 236);
+            box-shadow:
+                0 6px 0 #9E7312,
+                0 10px 20px rgba(0, 0, 0, .20);
+        }
+
+        /* Botón AUTOMÁTICO */
+        .opcion-auto button {
+            background: #3e7bb8;
+            color: rgb(229, 219, 122);
+            box-shadow:
+                0 6px 0 #24486C,
+                0 10px 20px rgba(0, 0, 0, .20);
+        }
+
+        .opcion-manual button:hover,
+        .opcion-auto button:hover {
+            transform: translateY(-2px);
+        }
+
+        .opcion-manual button:active,
+        .opcion-auto button:active {
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+
+        .volver-inicio-container {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-volver-inicio {
+            background: #4A7BA7;
+            color: rgb(227, 206, 131);
+            border: none;
+            border-radius: 10px;
+            padding: 6px 14px;
+            /* Reducido para achicar el alto */
+            font-size: 0.65rem;
+            /* Reducido para achicar la letra */
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            top: 0;
+            width: auto;
+            /* Permite que se ajuste al max-width */
+            max-width: 100px;
+            /* Limita el ancho del botón */
+            margin: 0 auto;
+            /* Mantiene el centrado perfecto */
+            box-shadow:
+                0 4px 0 #294F70,
+                0 6px 10px rgba(0, 0, 0, .20);
+            transition: .20s;
+        }
+
+        .btn-volver-inicio:hover {
+            top: 2px;
+            box-shadow:
+                0 3px 0 #294F70,
+                0 5px 10px rgba(0, 0, 0, .22);
+        }
+
+        @media (min-width: 600px) {
+            .volver-inicio-container {
+                margin-top: 25px;
+                margin-bottom: 25px;
+            }
+
+            .btn-volver-inicio {
+                padding: 12px 28px;
+                font-size: 1rem;
+                width: auto;
+                max-width: none;
+                box-shadow:
+                    0 6px 0 #294F70,
+                    0 8px 14px rgba(0, 0, 0, .28);
+            }
+        }
+
+        /* =======================================================
+   BLOQUE MODO MANUAL
+======================================================= */
+
+        .bloque-conocimiento-manual {
+            margin: 20px 0;
+            padding: 18px 15px;
+            background: #F9FBFF;
+            border: 2px solid #4A7BA7;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+        }
+
+        .bloque-conocimiento-manual h2 {
+            color: #4A7BA7;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .intro-conocimiento {
+            text-align: center;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        #conocimiento_manual {
+            width: 100%;
+            min-height: 120px;
+            resize: none;
+            padding: 12px;
+            border: 2px solid #F5A623;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-sizing: border-box;
+        }
+
+        #biblioteca_manual {
+            margin-top: 15px;
+            padding: 12px;
+            width: 100%;
+            border: 2px dashed #4A7BA7;
+            border-radius: 12px;
+            background: #ffffff;
+            box-sizing: border-box;
+        }
+
+        .bloque-conocimiento-manual small {
+            display: block;
+            margin-top: 12px;
+            color: #666;
+            line-height: 1.5;
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 600px) {
+            .bloque-conocimiento-manual {
+                margin: 40px 0;
+                padding: 30px;
+            }
+
+            .bloque-conocimiento-manual h2 {
+                font-size: 1.6rem;
+            }
+
+            .intro-conocimiento {
+                margin-bottom: 30px;
+                font-size: 1rem;
+            }
+
+            #conocimiento_manual {
+                padding: 14px;
+                font-size: 1rem;
+            }
+
+            #biblioteca_manual {
+                padding: 14px;
+            }
+
+            .bloque-conocimiento-manual small {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* =======================================================
+   Biblioteca Visual
+======================================================= */
+
+        .lista-archivos-manual {
+            margin-top: 20px;
+        }
+
+        .item-archivo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px 12px;
+            background: #ffffff;
+            border: 1px solid #d8d8d8;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+            box-sizing: border-box;
+        }
+
+        .item-archivo span {
+            color: #4A7BA7;
+            font-weight: bold;
+            font-size: 0.9rem;
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+
+        .btn-eliminar-archivo {
+            background: #F5A623;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .btn-eliminar-archivo:hover {
+            background: #c9871c;
+        }
+
+        #buscador-biblioteca {
+            width: 100%;
+            margin: 10px 0 14px 0;
+            padding: 10px 12px;
+            border: 1px solid #C8D3DF;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        #barra-modo {
+            display: none;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            padding: 5px 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: rgba(62, 95, 138, 0.3);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+            box-sizing: border-box;
+        }
+
+        #barra-modo.modo-manual {
+            background: rgba(245, 178, 84, 0.35);
+            color: rgba(83, 102, 226, 0.5);
+        }
+
+        #barra-modo.modo-auto {
+            background: rgba(61, 121, 182, .35);
+            color: rgba(153, 133, 22, 0.5);
+        }
+
+        @media (min-width: 600px) {
+            .item-archivo {
+                padding: 12px 15px;
+            }
+
+            .item-archivo span {
+                font-size: 1rem;
+            }
+
+            .btn-eliminar-archivo {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+
+            #buscador-biblioteca {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            #barra-modo {
+                padding: 12px;
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        .titulo-centrado {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            color: #4A7BA7;
+            /* Azul corporativo de AUR+IA */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div style="text-align: center; margin-top: -60px; padding-bottom: -10px;">
+            <img src="https://i.postimg.cc/9fPQzx9d/AUR-IA-logo-con-marco-dorado-SIN-FONDO-(1).png" alt="Logo AUR+IA"
+                style="max-width: 500px; width: 90%; height: auto; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));">
+        </div>
+
+        <!-- BOTÓN VOLVER GLOBAL — NUEVO, una sola vez, fuera de todo -->
+        <div id="btn-volver-global" style="display: none; text-align: left; margin: -25px 0 15px 0;">
+            <button type="button" class="btn-volver-inicio" onclick="volverAlInicioHTML()">
+                ⬅ Cambiar modalidad
+            </button>
+        </div>
+
+        <!-- BARRA DE MODO (ya la tenés) -->
+        <div id="barra-modo" style="display:none;">
+            <span id="texto-modo"></span>
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- Pantalla Inicial de Selección de Modalidad -->
+        <!-- ===================================================== -->
+
+        <div id="pantalla-inicial-auria" class="pantalla-inicial">
+
+            <h1 style="margin-top:-30px; color:#4A7BA7; font-size:2.3rem;"><i>¡BIENVENID@!</i></h1>
+
+            <h2 style="color:#a79e4a;">¿Cómo deseas comenzar?</h2>
+
+            <p style="color:#4b70ce;">
+                <strong>Selecciona la modalidad que prefieras.</strong>
+            </p>
+
+            <div class="opcion-manual">
+
+                <h4>🙌🏼 MODO MANUAL</h4>
+
+                <p>
+                    <strong>Para que <span style="color: #c9871c; font-weight: bold;">AUR</span><span
+                            style="color: #4A7BA7; font-weight: bold;">+IA</span> te asista a partir del
+                        conocimiento que le compartas.</strong>
+                </p>
+
+                <button type="button" onclick="seleccionarModo('manual')">
+
+                    <strong>COMENZAR</strong>
+
+                </button>
+
+            </div>
+
+            <div class="opcion-auto">
+
+                <h4>🚀 MODO AUTOMÁTICO</h4>
+
+                <p>
+                    <strong>Para que <span style="color: #c9871c; font-weight: bold;">AUR</span><span
+                            style="color: #4A7BA7; font-weight: bold;">+IA</span> te acompañe las 24 horas y
+                        potencie tu gestión.</strong>
+                </p>
+
+                <button type="button" onclick="seleccionarModo('automatico')">
+
+                    <strong>AUTOMATIZAR</strong>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- BLOQUE INTERMEDIO: INSTRUCTIVO IMAP (Solo Automático) -->
+        <!-- ===================================================== -->
+
+
+        <div id="bloque-instructivo-imap"
+            style="display:none; text-align:center; max-width:600px; margin:30px auto; padding:25px; background:#f8f9fa; border:2px solid #4A7BA7; border-radius:12px;">
+
+            <!-- INJERTO CORREGIDO: Sin ID y sin display: none -->
+
+
+            <h2 style="color:#4A7BA7;">📖 Cómo activar tu Modo AUTOMÁTICO</h2>
+            <p style="text-align:left; color:#555;">
+                Para que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                    style="color: #4A7BA7; font-weight: bold;">helios</span> puedan acompañarte las 24 horas
+                redactando y organizando tus correos, necesitarás ingresar tu <strong>Llave de Conexión (Contraseña de
+                    Aplicación)</strong>.
+            </p>
+
+            <div
+                style="background:#fff; padding:15px; border-radius:8px; text-align:left; margin:15px 0; border-left:4px solid #c9871c;">
+                <p style="margin:0; font-weight:bold; color:#333;">Pasos rápidos para obtenerla:</p>
+                <ol style="margin:10px 0 0 20px; color:#555;">
+                    <li>Ingresa a la seguridad de tu cuenta de correo (Google / Outlook / etc.).</li>
+                    <li>Activa la verificación en dos pasos (si no la tenías activa).</li>
+                    <li>Genera una <strong>Contraseña de Aplicación</strong> de 16 letras.</li>
+                </ol>
+            </div>
+
+            <div class="volver-inicio-container">
+
+
+
+            </div>
+
+            <div style="display:flex; gap:18px; justify-content:center; margin:25px 0; flex-wrap:wrap;">
+
+                <button type="button" id="btn-ver-instructivo" style="padding:12px 22px; background:#4A7BA7; color:white;
+               border:none; border-radius:8px; cursor:pointer;
+               font-weight:bold;" onclick="mostrarSoloInstructivo()">
+
+                    📖 Ver INSTRUCTIVO
+
+                </button>
+
+                <button type="button" id="btn-ver-cuestionario" style="padding:12px 22px; background:#c9871c; color:white;
+               border:none; border-radius:8px; cursor:pointer;
+               font-weight:bold;" onclick="irAlCuestionarioDesdeInstructivo()">
+
+                    📝 Ver CUESTIONARIO
+
+                </button>
+            </div>
+
+
+        </div>
+
+
+        <div id="bloque-cuestionario">
+            <div id="barra-modo" style="display:none;">
+                <span id="texto-modo"></span>
+            </div>
+
+            <!-- INJERTO CORREGIDO: Sin ID y sin display: none -->
+
+
+
+            <div class="header-vyo" style="margin-top: 40px; margin-bottom: 15px;">
+                <div class="titulo-entrada" style="font-size: 2rem;">CUESTIONARIO</div>
+                <div class="vyo-main">
+                    <span class="v-vyo" style="font-size: 2rem; padding-right: 3px;">V</span>
+                    <span class="y-vyo" style="font-size: 1.5rem;">y</span>
+                    <span class="o-vyo" style="font-size: 2rem; padding-left: 2px;">O</span>
+                </div>
+                <span class="sub-vyo" style="display: inline-block; white-space: nowrap;">
+                    -tu <span style="color: #cfa96b; font-weight: bold;">V</span><b>ida</b> y <span
+                        style="color: #2a6395; font-weight: bold;">O</span><b>bra</b>-
+                </span>
+            </div>
+
+            <p class="intro">Para que tus futuros asistentes postales —<span
+                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                    style="color: #4A7BA7; font-weight: bold;">helios</span>—
+                comiencen a conocerte, responde los distintos campos que verás a continuación relacionados a tu
+                <strong>V</strong>ida y tu <strong>O</strong>bra. Hazlo con el mayor detalle de
+                información posible.
+            </p>
+
+            <div class="aviso-recarga">
+                💡 <b>Tip de <span style="color: #c9871c; font-weight: bold;">AUR</span><span
+                        style="color: #4A7BA7; font-weight: bold;">+IA</span></b>: Si por cualquier razón tienes que
+                dejar
+                el cuestionario
+                incompleto, o necesitas modificarlo, vuelve a escribir tu email y
+                pulsa el botón <b>[RECARGAR MIS DATOS]</b>.<br> ¡Paciencia que en menos de
+                un segundo se hace La Magia!
+            </div>
+
+            <form id="form-vyo">
+
+                <!--=====================================================-->
+                <!-- BLOQUE LLAVE DE CONEXIÓN (Dinamizado por JS)          -->
+                <!-- ===================================================== -->
+                <div id="bloque-llave-conexion"
+                    style="margin-top: 25px; background-color: #F9FBFF; padding: 20px; border: 2px solid #4A7BA7; border-radius: 8px; transition: opacity 0.3s ease;">
+                    <label
+                        style="display: block; font-weight: bold; color: #4A7BA7; margin-bottom: 10px; font-size: 1.1em;">
+                        ➔ Pega aquí tu Llave de Conexión (16 letras):
+                    </label>
+                    <input type="text" name="clave_aplicacion" id="llave-conexion" placeholder="abcd efgh ijkl mnop"
+                        style="border: 2px solid #F5A623; font-family: monospace; font-size: 1.3em; text-align: center; width: 100%;">
+                    <small style="color: #736c6c; display: block; margin-top: 10px; line-height: 1.4;">
+                        <strong>* Esta llave se encriptará inmediatamente en tu archivo de cliente para tu total
+                            seguridad.</strong>
+                    </small>
+                </div>
+
+                <!-- BOTONES DE BIFURCACIÓN SOLICITADOS AL INICIO -->
+                <div class="profile-selector-container">
+                    <p class="profile-selector-title">Selecciona cuál de los cuestionario deseas completar:</p>
+
+                    <div class="profile-buttons"
+                        style="display: flex; justify-content: center; gap: 30px; align-items: flex-start; max-width: 750px; margin: 0 auto;">
+
+                        <div
+                            style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <button type="button" id="btn-integral" class="btn-mode" onclick="setFlujo('integral')"
+                                style="width: 100%; max-width: 280px;">
+                                Tu Vida y Obra INTEGRAL
+                            </button>
+                            <p
+                                style="font-size: 0.88rem; color: #898f12; margin-top: 10px; line-height: 1.4; max-width: 260px; font-style: italic;">
+                                <strong>Para que nos compartas en detale tu aspecto personal, cotidiano y afectivo,
+                                    además
+                                    de tu
+                                    faceta laboral, comercial y social.</strong>
+                            </p>
+                        </div>
+
+                        <div
+                            style="flex: 1; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <button type="button" id="btn-profesional" class="btn-mode active"
+                                onclick="setFlujo('profesional')" style="width: 100%; max-width: 280px;">
+                                Tu Vida y Obra PROFESIONAL
+                            </button>
+                            <p
+                                style="font-size: 0.88rem; color: #2946b0; margin-top: 10px; line-height: 1.4; max-width: 260px; font-style: italic;">
+                                <strong>Para que nos compartas en detalle aspectos de tu profesión y otros vínculos
+                                    con
+                                    la
+                                    sociedad.</strong>
+                            </p>
+                        </div>
+
+                    </div>
+                    <div
+                        style="max-width: 700px; margin: 10px auto 0 auto; padding: 15px 20px; background-color: #f9fbfd; border-left: 4px solid var(--azul-aur); border-radius: 4px; text-align: left;">
+                        <h4
+                            style="margin-top: 0; margin-bottom: 8px; color: var(--azul-aur); font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                            📌 ACLARACIONES OPORTUNAS sobre tu elección:
+                        </h4>
+
+                        <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: #444; line-height: 1.5;">
+                            <li style="margin-bottom: 10px;">
+                                <strong>Flexibilidad total:</strong> Puedes completar uno de los cuestionarios y en
+                                otro
+                                momento rellenar la otra opción. La información ya cargada no se borra y se puede
+                                modificar.
+                                <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> se adaptarán a las
+                                modificaciones que realices.<br><br>
+                                <span style="color: #4A7BA7; font-weight: bold;">Ambos cuestionarios pueden
+                                    modificarse
+                                    en
+                                    todo momento, eliminando datos o cargando nuevos.</span>
+
+                            </li>
+                            <li>
+                                <strong>¿Qué pasa con la correspondencia íntima, personal?...:</strong><br>
+                                Si eliges el cuestionario
+                                <strong>PROFESIONAL</strong> y recibes un correo de tu círculo íntimo (por
+                                ejemplo, un mensaje de la <em>"tía Juana"</em>), <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> <strong>lo
+                                    ignorarán</strong>.
+                                Dicho correo no se archivará ni se responderá, PERO quedará intacto en tu
+                                bandeja de Entrada habitual para tu lectura exclusiva, garantizando el resguardo
+                                absoluto de
+                                tu privacidad.
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- SECCIÓN: TU VIDA -->
+                <div class="seccion-card vida-bg">
+                    <h2>Tu Vida...</h2>
+                    <div class="campo-grupo">
+                        <label>Email <span style="font-size: 17px; color: rgb(177, 172, 177);">(escribe tu dirección
+                                principal)</span></label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="email" name="email_contacto" id="email" required placeholder="tu@email.com"
+                                autocomplete="email">
+                            <input type="hidden" name="email_servicio" value="auria.desarrollo@gmail.com">
+                            <button type="button" class="btn-cargar" onclick="cargarDatos()">RECARGAR<br> MIS
+                                DATOS</button>
+                        </div>
+                    </div>
+                    <div class="campo-grupo">
+                        <label>Nombre completo</label>
+                        <textarea name="nombre" id="nombre" rows="1"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="celular" class="form-label">Móvil <span
+                                style="font-size: 17px; color: rgb(177, 172, 177);">-ingresa tu número sin espacios
+                                y en
+                                formato internacional, tal como aparece en tu perfil de WhatsApp-, de esta
+                                manera:</span></label>
+                        <input type="tel" id="celular" name="celular" placeholder="+5491162345678"
+                            pattern="^\+?[0-9\s\-]+$">
+                    </div><br>
+
+                    <!-- SUB-CONTENEDOR DE CAMPOS EXCLUSIVAMENTE PERSONALES (Se ocultan/deshabilitan dinámicamente) -->
+                    <div id="personal-fields" class="personal-subcontainer">
+                        <div class="campo-grupo"><label>¿Con qué apodos te nombran tus familiares y
+                                amigos?</label><textarea name="apodo" id="apodo" rows="1"></textarea></div>
+                        <div class="campo-grupo"><label>Compartinos la lista de tus actividades personales <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">-actividades del espíritu,
+                                    de la
+                                    mente, artísticas, deportivas, hobbies, etcétera-</span></label><textarea
+                                name="actividades" id="actividades" rows="2"></textarea></div>
+                        <div class="campo-grupo"><label>¿Quiénes son los miembros de tu círculo familiar? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a
+                                    continuación-</span></label><textarea name="familia" id="familia"
+                                rows="2"></textarea>
+                        </div>
+                        <div class="campo-grupo"><label>¿Quiénes son tus amigos cercanos? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a continuación
+                                    con
+                                    <strong>APELLIDO</strong> de ser posible, para distinguirlos de otros con igual
+                                    nombre-</span></label><textarea name="amigos" id="amigos" rows="2"></textarea>
+                        </div>
+                        <div class="campo-grupo"><label>¿Tienes mascotas? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a
+                                    continuación si lo consideras nacesario-</span></label><textarea name="mascotas"
+                                id="mascotas" rows="1"></textarea>
+                        </div>
+                        <div class="campo-grupo"><label>¿Fechas de cumpleaños, fechas de aniversarios, fechas de
+                                eventos
+                                para recordar? <span style="font-size: 17px; color: rgb(177, 172, 177);">-el detalle
+                                    a
+                                    continuación-</span></label><textarea name="fechas" id="fechas" rows="2"></textarea>
+                        </div>
+                        <div class="campo-grupo"><label>¿Hay otros datos de importancia que tanto <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> deban saber para
+                                asistirte
+                                mejor? <span style="font-size: 17px; color: rgb(177, 172, 177);">-cuéntanos a
+                                    continuación-</span></label><textarea name="vida_extra" id="vida_extra"
+                                rows="3"></textarea></div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN: TU OBRA -->
+                <div class="seccion-card obra-bg">
+                    <h2>Tu Obra...</h2>
+                    <div class="campo-grupo">
+                        <label>¿Qué tipo de emprendimiento, actividad profesional, comercial o empresarial
+                            realizas?</label>
+                        <textarea name="tarea_profesional" id="tarea_profesional" rows="1"></textarea>
+                        <div id="counter_tarea_profesional" class="char-counter">0 / 5000</div>
+                        <div id="alert_tarea_profesional" class="premium-alert">🌟 <b>Nota de AUR+IA:</b> Límite
+                            alcanzado.
+                            Amplía tu capacidad de memoria si necesitas seguir escribiendo. Comunícate con Nosotros.
+                        </div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>¿Tus actividades se desarrollan de manera independiente o bajo relación de
+                            dependencia?</label>
+                        <textarea name="tipo_empleo" id="tipo_empleo" rows="1"></textarea>
+                        <div id="counter_tipo_empleo" class="char-counter">0 / 5000</div>
+                        <div id="alert_tipo_empleo" class="premium-alert">🌟 <b>Nota de AUR+IA:</b> Límite
+                            alcanzado.
+                            Comunícate con Nosotros.</div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>¿Cuál es el nombre del
+                            emprendimiento que llevas adelante o del comercio, corporación, empresa de la que formas
+                            parte?</label>
+                        <textarea name="empresa" id="empresa" rows="1"></textarea>
+                        <div id="counter_empresa" class="char-counter">0 / 5000</div>
+                        <div id="alert_empresa" class="premium-alert">🌟 <b>Nota de AUR+IA:</b> Límite alcanzado.
+                            Comunícate
+                            con Nosotros.</div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>¿Quiénes son tus colegas de rubro, compañeros o vínculos institucionales con los que
+                            te
+                            relacionas
+                            frecuentemente? <span style="font-size: 17px; color: rgb(124, 121, 124);">-menciónalos a
+                                continuación-</span></label>
+                        <textarea name="companeros" id="companeros" rows="2"></textarea>
+                        <div id="counter_companeros" class="char-counter">0 / 5000</div>
+                        <div id="alert_companeros" class="premium-alert">🌟 <b>Nota de AUR+IA:</b> Límite alcanzado.
+                            Comunícate con Nosotros.</div>
+                    </div>
+
+                    <!-- NUEVOS CAMPOS ADICIONALES: DETALLES DE FRICCIÓN Y PRIORIDADES -->
+                    <div class="campo-grupo">
+                        <label>¿Qué situaciones te hacen perder más tiempo o complican tus tareas diarias?</label>
+                        <p style="font-size: 14px; color: #918b8b; margin-top: -5px; font-style: italic;">
+                            <strong>Para que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> puedan asistirte con
+                                eficacia,
+                                identifica tus distintos "puntos de dolor" dentro del siguiente listado:</strong>
+                        </p>
+
+                        <p style="font-size: 14px; color: #b44fea; margin-top: -5px; font-style: italic;">
+                            ✅ ¿Pierdes mensajes o consultas por encontrarte ocupado y no poder responder a
+                            tiempo?<br><br>
+                            ✅ ¿Te resulta difícil responder consultas con la rapidez que quisieras?<br><br>
+                            ✅ ¿Te cuesta organizar tu agenda, administrar turnos y recordar compromisos?<br><br>
+                            ✅ ¿Dificultad para el seguimiento tanto a pacientes, clientes, proveedores?<br><br>
+                            ✅ ¿Te resulta difícil conocer el stock disponible o el estado actualizado de tus
+                            productos?
+                            <br><br>
+                            ✅ ¿Te cuesta mantener un registro meticuloso de los ingresos y egresos de tu actividad
+                            diaria?<br><br>
+                            ✅ ¿Dificultad para mantener organizada y actualizada la información de clientes y
+                            contactos?
+                            <br><br>
+                            ✅ ¿Temor a perder información importante por no tener una copia organizada y segura?<br><br>
+                            ✅ ¿Dificultad para redactar presupuestos, propuestas o respuestas profesionales de
+                            manera
+                            rápida?<br><br>
+                            ✅ ¿Exceso de mensajes y correos que dificultan identificar rápidamente lo realmente
+                            importante?<br><br>
+                            ✅ ¿Sientes que dedicas demasiado tiempo a tareas administrativas y muy poco a las
+                            personas o
+                            actividades que realmente aportan valor?<br><br ✅ ¿Otras situaciones que te haga perder
+                                tiempo, energía o tranquilidad? Cuéntanos cuáles. </p>
+                            <br>
+
+
+                            <textarea name="fricciones_operativas" id="fricciones_operativas" rows="2"
+                                placeholder="Escribe AQUÍ todos los puntos que te identifican"></textarea>
+                        <div id="counter_fricciones_operativas" class="char-counter">0 / 5000</div>
+                        <div id="alert_fricciones_operativas" class="premium-alert">🌟 <b>Nota de AUR+IA:</b> Límite
+                            alcanzado. Comunícate con Nosotros para expandir tu capacidad de almacenamiento.</div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>¿Qué tareas quisieras delegarle a <span
+                                style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">helios</span>?</label>
+
+                        <p style="font-size: 14px; color: #918b8b; margin-top: -5px; font-style: italic;">
+                            <strong>Revisa si algún ítem o varios del siguiente listado coincide con TUS
+                                NECESIDADES:</strong>
+                        </p>
+
+                        <ul style="font-size: 14px; color: #4360c9; margin-top: -5px; font-style: italic;">
+                            ✅ Que organicen y administren mi agenda diaria.<br><br>
+                            ✅ Que administren mis turnos, incluyendo confirmaciones, cancelaciones y recordatorios
+                            automáticos.
+                            <br><br>
+                            ✅ Que respondan las consultas de manera empática y con mi estilo, 24/7<br><br>
+                            ✅ Que me ayuden a mantener actualizado el control del stock y de los movimientos de mi
+                            actividad diaria.<br><br>
+                            ✅ Que realicen seguimientos periódicos de pacientes, clientes y proveedores para evitar
+                            olvidos.
+                            <br><br>
+                            ✅ Que preparen borradores de mensajes, respuestas y comunicaciones para WhatsApp,
+                            Telegram y
+                            correo electrónico.<br><br>
+                            ✅ Que organicen pedidos, consultas y compromisos pendientes.<br><br>
+                            ✅ Que mantengan organizada mi documentación y la información importante.<br><br>
+                            ✅ Que pueda recibir resúmenes periódicos para mantener una visión clara de la actividad
+                            realizada.<br><br>
+                            ✅ Que identifiquen y prioricen automáticamente las consultas y oportunidades más
+                            importantes
+                            provenientes de correo electrónico, WhatsApp, Telegram, formularios o páginas web.<br><br>
+                            ✅ Que me asistan para redactar presupuestos, propuestas y comunicaciones
+                            comerciales.<br><br>
+                            ✅ Que me permitan recuperar tiempo para dedicarlo a mis clientes, mi vocación y mi vida
+                            personal.<br><br>
+                            ✅ Si tienes otras necesidades, compártelas a continuación.</p>
+                            <br>
+
+
+                            <textarea name="prioridades_delegacion" id="prioridades_delegacion" rows="2"
+                                placeholder="Escribe AQUÍ aquello que estás necesitando"></textarea>
+                            <div id="counter_prioridades_delegacion" class="char-counter">0 / 5000</div>
+                            <div id="alert_prioridades_delegacion" class="premium-alert">🌟 <b>Nota de AUR+IA:</b>
+                                Límite
+                                alcanzado. Comunícate con Nosotros para expandir tu capacidad de almacenamiento.
+                            </div>
+                    </div>
+                    <!-- FIN DE NUEVOS CAMPOS ADICIONALES: DETALLES DE FRICCIÓN Y PRIORIDADES -->
+
+
+                    <div class="campo-grupo">
+                        <label>¿Participas en clubes, asociaciones, grupos comunitarios, instituciones, actividades
+                            solidarias o espacios sociales que no hayas mencionado?<br>
+                            <span
+                                style="font-size: 14px; color: #6d6666; margin-top: -5px; font-style: italic;">Cuéntanos
+                                sobre aquello que realizas por fuera de tus tareas laborales, actividades que
+                                impliquen
+                                contacto o comunicación con otras personas.-</span></label>
+                        <textarea name="social_extra" id="social_extra" rows="2"></textarea>
+                        <div id="counter_social_extra" class="char-counter">0 / 5000</div>
+                        <div id="alert_social_extra" class="premium-alert">🌟 <b>Nota de AUR+IA:</b> Límite
+                            alcanzado.
+                            Comunícate con Nosotros.</div>
+                    </div>
+                    <div class="campo-grupo">
+                        <label>¿Hay algo importante que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">helios</span> deban saber para
+                            asistirte mejor?<br> <span
+                                style="font-size: 14px; color: #918b8b; margin-top: -5px; font-style: italic;">Indica
+                                cualquier detalle adicional sobre tus hábitos de comunicación,
+                                responsabilidades, preferencias, proyectos y situaciones especiales que consideres
+                                relevante
+                                para que tus asistentes operen con la mayor
+                                efectividad posible.</span></label>
+                        <textarea name="obra_extra" id="obra_extra" rows="3"></textarea>
+                        <div id="counter_obra_extra" class="char-counter">0 / 5000</div>
+                        <div id="alert_obra_extra" class="premium-alert">🌟 <b>Nota de AUR+IA:</b> Límite alcanzado.
+                            Comunícate con Nosotros.</div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN: CATEGORÍAS POSTALES -->
+                <div class="seccion-card relacion-bg">
+                    <h2>Tu relación con Nosotros...</h2>
+                    <p style="margin-bottom: 25px;">Para que <span
+                            style="color: #F5A623; font-weight: bold;">AUR</span><span
+                            style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                            style="color: #F5A623; font-weight: bold;">AUR</span><span
+                            style="color: #4A7BA7; font-weight: bold;">helios</span> traten tu correspondencia con
+                        eficiencia, tus correos se clasificarán en las <strong><u>9 categorías</u></strong> que te
+                        detallamos a continuación.<br> El objetivo de <span
+                            style="color: #F5A623; font-weight: bold;">AUR</span><span
+                            style="color: #4A7BA7; font-weight: bold;">+IA</span> es que recibas reportes diarios
+                        para
+                        que
+                        estés informad@ de todo cuanto recibas.</p>
+
+                    <!-- Categoría 1 -->
+                    <div class="cat-box cat-box-1">
+                        <label><span class="cat-titulo-1">🟣 1_ Emails URGENTES — Gestión Inmediata</span></label>
+                        <p style="font-size: 0.92em; color: #5a3d7a; margin-bottom: 10px;">
+                            <em>Incluirá toda info que consideres <strong>Sensible</strong>, por ejemplo: sobre
+                                salud,
+                                Bancos, Seguros, judiciales, vivienda/consorcio, vencimientos impostergables (Obra
+                                Social,
+                                Impuestos, Tarjetas), resultados médicos, material de estudio de la
+                                facultad/colegio,
+                                avisos
+                                barriales, etcétera.</em>
+                        </p>
+                        <p>Estos emails serán etiquetados como <span class="urgente-label">URGENTE</span> y bajo un
+                            tratamiento expeditivo -se te informará de inmediato-.</p>
+
+                        <div class="campo-personalizado">
+                            <span class="campo-personalizado-titulo" style="color: #8A2BE2;">⭐ Si tienes otras
+                                situaciones
+                                que hay que seguir de cerca, agrégalas con todo detalle en el campo a
+                                continuación:</span>
+                            <span class="campo-personalizado-ejemplos">Ejemplos: "Estudio Jurídico XXX por mi
+                                litigio
+                                comercial" — "consorcio de mi edificio" — "Dr. Fulano de Tal, médico de mi
+                                mamá"</span>
+                            <textarea name="cat1_personalizado" id="cat1_personalizado" rows="2"
+                                placeholder="Escribí lo que consideres vital para que AURelia y AURhelios te aprendan..."></textarea>
+                        </div>
+                        <div class="campo-personalizado" style="margin-top: 10px;">
+                            <span class="campo-personalizado-titulo" style="color: #8A2BE2;">⭐ ¿Tienes remitentes
+                                clave
+                                que
+                                SIEMPRE deben estar en la categoría de URGENTE?</span>
+                            <span class="campo-personalizado-ejemplos">Ejemplos: "dr.garcia@consultorio.com" —
+                                "Hospital
+                                YYY" — "cualquier email de @bancozzz.com.ar" — "mi contadora Susana H."</span>
+                            <textarea name="cat1_remitentes" id="cat1_remitentes" rows="2"
+                                placeholder="Agrega nombre completo, emails o dominios de remitentes que no te deben faltar..."></textarea>
+                        </div><br>
+
+                        <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                            categoría?
+                        </p>
+                        <select name="cat1_modo" id="cat1_modo">
+                            <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                por
+                                mí y
+                                que AURhelios envíe el correo -respuesta automática-.</option>
+                            <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                respuesta
+                                y
+                                que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                            <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                "Borradores"
+                                para yo responderlo luego -emails no respondidos-.</option>
+                        </select>
+                        <label
+                            style="display: inline-block; margin-top: 15px; line-height: 1.4; vertical-align: top;">¿Con
+                            qué tono prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">elia</span> se dirija a estas personas e
+                            instituciones? <span style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Formal,
+                                urgente,
+                                directo).</span></label>
+                        <textarea name="cat1_tono" id="cat1_tono" rows="1"></textarea>
+                    </div>
+
+                    <!-- Categoría 2 -->
+                    <div id="contenedor-cat2" class="cat-box cat-box-2" style="transition: all 0.4s ease;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; margin-bottom: 15px;">
+                            <div style="max-width: 80%;">
+                                <label style="margin: 0;"><span class="cat-titulo-2">🟢 2_ Familia y Amigos
+                                        Cercanos</span></label>
+                                <p style="font-size: 0.85rem; color: #555; margin: 4px 0 0 0; font-style: italic;">
+                                    ¿Deseás habilitar esta categoría para que los asistentes organicen tu
+                                    correspondencia
+                                    personal en carpetas separadas?
+                                </p>
+                            </div>
+                            <label class="switch-control">
+                                <input type="checkbox" id="toggle-cat2" checked onchange="toggleCategoria2()">
+                                <span class="slider-toggle"></span>
+                            </label>
+                        </div>
+
+
+                        <!-- Categoría 2 clonada (Estructura fluida adaptada de la Cat 3) -->
+                        <div class="cat-box cat-box-2">
+                            <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                    style="color:#39893e">PRIORIDAD ALTA</span>...</p>
+
+                            <div class="campo-personalizado">
+                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Qué contactos quieres
+                                    incluir en esta categoría?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "mamá Rosa" — "hermana Claudia" —
+                                    "amigo José Diomedi" — "prima Roxana Rico" — "amiga María de la facultad"</span>
+                                <textarea name="cat2_contactos" id="cat2_contactos" rows="2"
+                                    placeholder="Nombres o emails de familia y amigos cercanos -con APELLIDO de ser posible-..."></textarea>
+                            </div><br>
+
+                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+
+                            <select name="cat2_modo" id="cat2_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    y que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                </option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores" para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+
+                            <label style="margin-top:15px; display: block; line-height: 1.4;">¿Con qué tono prefieres
+                                que
+                                <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> se dirija a tus seres
+                                queridos?
+                                <span
+                                    style="display: block; font-size: 15px; color: rgb(177, 172, 177); font-weight: normal; margin-top: 4px;">(Ej:
+                                    Cariñoso, breve, divertido).</span>
+                            </label>
+
+                            <textarea name="cat2_tono" id="cat2_tono" rows="1"></textarea>
+                        </div>
+                        <!--fin categoría 2 clonada-->
+
+                        <!-- Categoría 3 -->
+                        <div class="cat-box cat-box-3">
+                            <label><span class="cat-titulo-3">🟢 3_ Turnos Programados, Vencimientos y
+                                    Recordatorios</span></label>
+                            <p style="font-size: 0.92em; color: #1a5c1a; margin-bottom: 10px;">
+                                <em>A modo de ejemplo, puede incluir: citas médicas programadas, turno podología,
+                                    vencimientos
+                                    ordinarios
+                                    como
+                                    cuota del club, Netflix, Spotify, gimnasio y otras suscripciones de ocio,
+                                    etcétera.</em>
+                            </p>
+                            <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                    style="color: #1a7a1a;">PRIORIDAD
+                                    ALTA</span>...</p>
+
+                            <div class="campo-personalizado">
+                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Hay vencimientos o
+                                    turnos
+                                    específicos que quieras destacar?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "vencimiento de la cuota del auto
+                                    el
+                                    día 10
+                                    de cada mes" — "turno semestral con el cardiólogo" — "renovación del seguro del auto
+                                    en
+                                    agosto"</span>
+                                <textarea name="cat3_personalizado" id="cat3_personalizado" rows="2"
+                                    placeholder="Describí vencimientos o turnos habituales de importancia para vos..."></textarea>
+                            </div><br>
+
+                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+                            <select name="cat3_modo" id="cat3_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y
+                                    que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    y
+                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores"
+                                    para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+                            <label style="margin-top:15px;">¿Con qué tono? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Conciso, breve,
+                                    formal).</span></label>
+                            <textarea name="cat3_tono" id="cat3_tono" rows="1"></textarea>
+                        </div>
+
+                        <!-- Categoría 4 -->
+                        <div class="cat-box cat-box-4">
+                            <label><span class="cat-titulo-4">🟢 4_ Relaciones laborales IMPOSTERGABLES</span></label>
+                            <p style="font-size: 0.92em; color: #1a5c1a; margin-bottom: 10px;">
+                                <em>Puede incluir: jefes, directivos, coordinadores de área, plazos de entrega, clientes
+                                    VIP,
+                                    interesados estratégicos (leads) a seguir, proveedores clave, etcétera.</em>
+                            </p>
+                            <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                    style="color: #1a7a1a;">PRIORIDAD
+                                    ALTA</span>...</p>
+
+                            <div class="campo-personalizado">
+                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Quiénes son tus
+                                    directivos,
+                                    clientes VIP, proveedores clave, etcétera a tener en cuenta?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "gerente@empresa.com" — "cliente
+                                    Fernández
+                                    de FerStudio" — "proveedor de materiales Sr. López" — "directora Martínez"</span>
+                                <textarea name="cat4_personalizado" id="cat4_personalizado" rows="2"
+                                    placeholder="Nombres o emails de contactos clave para seguir de cerca..."></textarea>
+                            </div>
+                            <div class="campo-personalizado" style="margin-top: 10px;">
+                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Qué otros contactos
+                                    institucionales querés clasificar en esta sección?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "coordinador.sistemas@correo.com" —
+                                    "auditoría@estudio.com"</span>
+                                <textarea name="cat4_contactos" id="cat4_contactos" rows="2"
+                                    placeholder="Agrega otros remitentes corporativos o profesionales de peso..."></textarea>
+                            </div><br>
+
+                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+                            <select name="cat4_modo" id="cat4_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y
+                                    que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    y
+                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores"
+                                    para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+                            <label style="margin-top:15px;">¿Con qué tono? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Respetuoso, formal,
+                                    breve).</span></label>
+                            <textarea name="cat4_tono" id="cat4_tono" rows="1"></textarea>
+                        </div>
+
+                        <!-- Categoría 5 -->
+                        <div class="cat-box cat-box-5">
+                            <label><span class="cat-titulo-5">🟠 5_ Relaciones Laborales RUTINARIAS</span></label>
+                            <p style="font-size: 0.92em; color: #c6711b; margin-bottom: 10px;">
+                                <em>A modo de ejemplo, puedes incluir: compañeros, seguimiento de asignaciones,
+                                    proveedores
+                                    habituales,
+                                    reportes de estado, informes rutinarios.</em>
+                            </p>
+                            <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                    style="color: #e67e22;">PRIORIDAD
+                                    MEDIA</span></p>
+
+                            <div class="campo-personalizado">
+                                <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿Quiénes son tus
+                                    colegas de
+                                    equipo, clientes o proveedores de trato diario?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "Josefina, de Capital Humano" —
+                                    "cliente
+                                    Juan Fernández de FerStudio" — "proveedor de insumos Sr. López"</span>
+                                <textarea name="cat5_personalizado" id="cat5_personalizado" rows="2"
+                                    placeholder="Nombres o emails de tus contactos comerciales cotidianos..."></textarea>
+                            </div>
+                            <div class="campo-personalizado" style="margin-top: 10px;">
+                                <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿Qué otras cuentas o
+                                    firmas
+                                    deseas listar?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "facturacion@proveedor.com" —
+                                    "consultas@estudio.com"</span>
+                                <textarea name="cat5_contactos" id="cat5_contactos" rows="2"
+                                    placeholder="Agrega otras casillas de correo operativas habituales..."></textarea>
+                            </div><br>
+
+                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+                            <select name="cat5_modo" id="cat5_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y
+                                    que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    and
+                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores"
+                                    para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+                            <label style="margin-top:15px;">¿Con qué tono? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Cordial,
+                                    corporativo).</span></label>
+                            <textarea name="cat5_tono" id="cat5_tono" rows="1"></textarea>
+                        </div>
+
+                        <!-- Categoría 6 -->
+                        <div class="cat-box cat-box-6">
+                            <label><span class="cat-titulo-6">🟠 6_ Contenido de Valor / Cursos de
+                                    Interés</span></label>
+                            <p style="font-size: 0.92em; color: #c6711b; margin-bottom: 10px;">
+                                <em>Podría incluir, por ejemplo: material de estudio, capacitación complementaria,
+                                    newsletters
+                                    educativas, boletines de valor real.</em>
+                            </p>
+                            <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                    style="color: #e67e22;">PRIORIDAD
+                                    MEDIA</span></p>
+
+                            <div class="campo-personalizado">
+                                <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿De qué instituciones o
+                                    personas estás esperando información y/o documentación?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "Tutoriales de Adrián Saenz" —
+                                    "Alianza
+                                    Francesa" — "PDF Libro Historia Comparada I" — "Taller de Cocina"</span>
+                                <textarea name="cat6_personalizado" id="cat6_personalizado" rows="2"
+                                    placeholder="Agrega el material esperado, nombres o emails de tu interés..."></textarea>
+                            </div><br>
+
+                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+                            <select name="cat6_modo" id="cat6_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y
+                                    que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    y
+                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores"
+                                    para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+                            <label style="margin-top:15px;">¿Con qué tono? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Interés,
+                                    agradecimiento).</span></label>
+                            <textarea name="cat6_tono" id="cat6_tono" rows="1"></textarea>
+                        </div>
+
+                        <!-- Categorías 7, 8, 9 -->
+                        <div id="contenedor-cat7" class="cat-box cat-box-7">
+                            <label><span class="cat-titulo-7">🔵 7_ Personas Lejanas o Desconocidas</span></label>
+                            <p style="font-size: 0.92em; color: #1a3d7a; margin-bottom: 10px;"><em>Contactos sin
+                                    referencia
+                                    clara.</em></p>
+                            <p style="font-size: 1.1em; color: #1a3d7a; margin-bottom: 20px;">(Esta categoría se
+                                habilita si
+                                eliges responder el Cuestionario modalidad
+                                <STRONG>INTEGRAL</STRONG>).
+                            </p>
+                            <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                    style="color: #3498db;">PRIORIDAD
+                                    BAJA</span><br><br> ¿Cómo prefieres que <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+                            <select name="cat7_modo" id="cat7_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y
+                                    que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    y
+                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores"
+                                    para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+                            <label style="margin-top:15px;">¿Con qué tono? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Interés, pidiendo mayor
+                                    información).</span></label>
+                            <textarea name="cat7_tono" id="cat7_tono" rows="1"></textarea>
+                        </div>
+
+                        <div class="cat-box cat-box-8">
+                            <label><span class="cat-titulo-8">🔵 8_ Publicidad / Comerciales</span></label>
+                            <p style="font-size: 0.92em; color: #1a3d7a; margin-bottom: 10px;"><em>Newsletters masivos,
+                                    ofertas,
+                                    promociones de tiendas, publicidad identificable.</em></p>
+                            <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                    style="color: #3498db;">PRIORIDAD
+                                    BAJA</span><br><br> ¿Cómo prefieres que <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+                            <select name="cat8_modo" id="cat8_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y
+                                    que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    y
+                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores"
+                                    para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+                            <label style="margin-top:15px;">¿Con qué tono? <span
+                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Neutral,
+                                    ignorar).</span></label>
+                            <textarea name="cat8_tono" id="cat8_tono" rows="1"></textarea>
+                        </div>
+
+                        <div class="cat-box cat-box-9">
+                            <label><span class="cat-titulo-9">🔴 9_ Spam y Basura</span></label>
+                            <p style="font-size: 0.92em; color: #6b0000; margin-bottom: 10px;">
+                                <em>Correos con contenido malicioso, phishing, estafas, publicidad agresiva, personas de
+                                    quienes
+                                    ya no te interesa recibir correspondencia.<br> AURhelios puede archivar o eliminar
+                                    estos
+                                    correos sin notificarte.</em>
+                            </p>
+                            <p>¿Cómo quieres que proceda <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> con estos correos?</p>
+                            <select name="cat9_modo" id="cat9_modo">
+                                <option value="no_deseado" style="color: blue;">1) Que los envíe a "Correo no deseado"
+                                    para
+                                    mi
+                                    revisión</option>
+                                <option value="eliminar" style="color: red;">2) Que los elimine definitivamente</option>
+                            </select>
+
+                            <div class="campo-personalizado" style="margin-top: 15px;">
+                                <span class="campo-personalizado-titulo">⭐ ¿Hay remitentes o dominios que siempre
+                                    quisieras
+                                    bloquear?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "noresponder@publicidad.com" —
+                                    "todo lo
+                                    de
+                                    @ofertas.net" — "emails de tal firma que me molestan" - "bloquear los mensajes de
+                                    Fulano
+                                    de
+                                    Tal"</span>
+                                <textarea name="cat9_bloqueados" id="cat9_bloqueados" rows="2"
+                                    placeholder="Remitentes o dominios que siempre deben ir a spam..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 
+                            <input type="checkbox" name="interes_futuro" value="agenda_turnos">
+                            <label>Gestión inteligente de agenda y turnos</label>
+
+                            <input type="checkbox" name="interes_futuro" value="confirmacion_citas">
+                            <label>Confirmación automática de citas y reuniones</label>
+                -->
+                    <!-- SECCIÓN CANALES ADICIONALES -->
+                    <div class="seccion-adicional">
+                        <h3 class="titulo-centrado">Tus canales de comunicación</h3>
+                        <p style="color: #005f80; margin-bottom: 25px; font-size: 0.95em;">
+                            Además del reporte diario por email, <span
+                                style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">+IA</span> puede enviarte alertas urgentes y
+                            reportes
+                            por <strong>WhatsApp</strong> y <strong>Telegram</strong> (servicio diferencial a muy bajo
+                            costo).<br> Completa este campo si ya cuentas con alguno de estos canales o si te interesa
+                            activarlos
+                            en el futuro.
+                        </p>
+
+                        <div class="campo-grupo">
+                            <label style="font-size: 1rem; font-weight: 700; color: #005f80;">📲 ¿Tienes
+                                <strong>Telegram</strong>?</label>
+                            <p
+                                style="font-size: 0.88em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px; margin-bottom: 10px;">
+                                Ejemplo: "Sí, mi usuario es @tunombre" — "Sí, pero no sé mi usuario" — "No tengo
+                                Telegram"
+                            </p>
+                            <textarea name="tiene_telegram" id="tiene_telegram" rows="1"
+                                style="font-size: 0.95rem; border: 1px solid #0099cc;"
+                                placeholder="Escribe AQUÍ tu usuario o número"></textarea>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label style="font-size: 1rem; font-weight: 700; color: #005f80;">💬 ¿Usás
+                                <strong>WhatsApp</strong>
+                                y te interesaría recibir reportes por esta vía?</label>
+                            <p
+                                style="font-size: 0.88em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px; margin-bottom: 10px;">
+                                Como seguramente el número de WhatsApp ya lo ingresaste arriba, aquí solo indícanos tu
+                                preferencia.<br> Ejemplo: "Sí, prefiero WhatsApp" — "No, prefiero email" — "Me da igual"
+                            </p>
+                            <textarea name="preferencia_whatsapp" id="preferencia_whatsapp" rows="1"
+                                style="font-size: 0.95rem; border: 1px solid #0099cc;"
+                                placeholder="¿Qué prefieres?"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN JUBILADO -->
+                    <div class="seccion-jubilado">
+                        <h3>¿Sos jubilad@ o pensionad@?</h3>
+                        <p style="color: #5a3d7a; margin-bottom: 20px; font-size: 0.95em;">Si formas parte de este
+                            sector,
+                            <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">+IA</span> tiene un <strong>Plan Especial
+                                Gratuito</strong> para ti: podrás recibir <strong>tres reportes diarios
+                                por
+                                Telegram</strong> (09:00 hs / 13:00 hs / 18:00 hs ⬅️ en este horario si recibieras
+                            mensajes
+                            URGENTES).<br> Si
+                            marcas
+                            que
+                            "sí", te contactaremos para activarlo.
+                        </p>
+                        <div class="campo-grupo">
+                            <label style="font-size: 1rem; font-weight: 700; color: var(--cat1-color);">¿Cuál es tu
+                                situación?</label>
+                            <select name="es_jubilado" id="es_jubilado"
+                                style="font-size: 1rem; border: 2px solid var(--cat1-border); background: #fdf8ff;">
+                                <option value="no" selected>No, no soy jubilado/a</option>
+                                <option value="si">Sí, soy jubilado/a o pensionado/a</option>
+                                <option value="proximo">Próximamente me jubilo</option>
+                            </select>
+                        </div>
+                        <div class="campo-grupo">
+                            <label style="font-size: 0.95rem; font-weight: 600; color: var(--cat1-color);">¿Tienes algún
+                                comentario
+                                adicional? <span
+                                    style="font-size: 0.85rem; color: var(--campo-nuevo-texto); font-style: italic;">(no
+                                    es
+                                    obligatorio)</span></label>
+                            <p
+                                style="font-size: 0.85em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px;">
+                                Ejemplo: "Tengo 70 años y me cuesta la tecnología" — "Mi familia me ayuda con el
+                                celular"
+                            </p>
+                            <textarea name="jubilado_comentario" id="jubilado_comentario" rows="2"
+                                style="font-size: 0.95rem; border: 1px solid var(--cat1-border);"
+                                placeholder=""></textarea>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="../email_04_con_Cuestionario_VyO.html"
+                            style="color: #4A7BA7; text-decoration: underline; font-size: 22px;">
+                            <strong>Si tienes dudas sobre algún punto de la configuración o si necesitas volver a
+                                revisarlo,
+                                regresa al instructivo desde aquí</strong><br><br><br>
+                        </a>
+                    </div>
+
+                    <!-- ===================================================== -->
+                    <!-- Biblioteca de Conocimiento (Modo MANUAL) -->
+                    <!-- ===================================================== -->
+
+                    <div id="bloque-conocimiento-manual" class="bloque-conocimiento-manual">
+
+                        <h2>Lo que quiero que <i><span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span></i> y <i><span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span></i> recuerden de mí...</h2>
+
+                        <p class="intro-conocimiento">
+
+                            Aquí puedes indicar criterios, preferencias, instrucciones o cualquier detalle que quieras
+                            que
+                            AURelia y AURhelios recuerden siempre sobre ti. Si deseas compartir documentos, puedes
+                            hacerlo
+                            en la Biblioteca de Archivos Personales.
+                        </p>
+                        <strong>Algunos ejemplos:</strong><br>
+                        + “Prefiero respuestas breves.”<br>
+                        + “Si dudás entre dos interpretaciones, preguntame antes de asumir.”<br>
+                        + “No hables de política salvo que yo lo pida.”<br>
+                        <p>
+
+                            <br><br>
+                        </p>
+
+                        <div class="campo-grupo">
+
+                            <textarea id="conocimiento_manual" name="conocimiento_manual" rows="4"
+                                placeholder="Escribe aquí aquello que quieres que AURelia y AURhelios recuerden sobre ti..."></textarea>
+
+                        </div>
+
+                        <div class="campo-grupo">
+
+                            <label>
+
+                                📚 Biblioteca de ARCHIVOS PERSONALES
+
+                            </label>
+
+                            <input type="file" id="biblioteca_manual" multiple>
+
+                            <div id="mensaje-biblioteca" class="mensaje-biblioteca" style="display:none;"></div>
+
+                            <input type="text" id="buscador-biblioteca" placeholder="🔍 Buscar archivo..."
+                                oninput="mostrarBibliotecaExistente(bibliotecaServidor)">
+
+                            <!-- Comienzo ORDENADOR -->
+
+                            <div class="controles-biblioteca">
+
+                                <label for="orden-biblioteca">
+                                    Ordenar por:
+                                </label>
+
+                                <select id="orden-biblioteca" onchange="mostrarBibliotecaExistente(bibliotecaServidor)">
+
+                                    <option value="fecha">🕒 Más recientes</option>
+                                    <option value="nombre">🔤 Nombre (A-Z)</option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- FIN ORDENADOR -->
+
+                            <div id="lista-archivos-manual" class="lista-archivos-manual">
+
+                            </div>
+
+                            <!-- COMIENZO PAGINACIÓN -->
+
+                            <div id="paginacion-biblioteca" class="paginacion-biblioteca">
+
+                                <button id="btn-pagina-anterior" type="button">
+                                    ◀ Anterior
+                                </button>
+
+                                <span id="texto-paginacion">
+                                    Página 1 de 1
+                                </span>
+
+                                <button id="btn-pagina-siguiente" type="button">
+                                    Siguiente ▶
+                                </button>
+
+                            </div>
+
+                            <!-- FIN PAGINACIÓN -->
+
+
+                            <h4>Archivos preparados para subir</h4>
+
+                            <div id="lista-archivos-pendientes" class="lista-archivos-manual">
+                            </div>
+
+                            <small>
+
+                                Puedes incorporar documentos,
+                                imágenes, libros, contratos,
+                                reglamentos, notas, fotografías,
+                                artículos y cualquier otro material.
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submit-btn">Enviar mi <span
+                            style="color: #F5A623; font-weight: bold;">V</span><span
+                            style="color: #99e0f6; font-weight: bold;">y</span><span
+                            style="color: #F5A623; font-weight: bold;">O</span> a <span
+                            style="color: #F5A623; font-weight: bold;">AUR</span><span
+                            style="color: #99e0f6; font-weight: bold;">+IA</span></button>
+
+
+                    <div id="vyo-alert-box"
+                        style="display: none; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 25px; font-weight: 600; font-size: 1.1rem; line-height: 1.5; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: all 0.3s ease-in-out;">
+                    </div>
+            </form>
+        </div>
+
+        <footer>
+            <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                style="color: #4A7BA7; font-weight: bold;">+IA</span> — Más que inteligencia artificial, <span
+                style="color: #F5A623; font-weight: bold;">AUR</span><span
+                style="color: #4A7BA7; font-weight: bold;">ora</span> de la Inteligencia <span
+                style="color: #4A7BA7; font-weight: bold;">EMPÁTICA</span>
+        </footer>
+    </div>
+
+    <script>
+        // ── Lógica de control para el segundo plano de la Categoría 2 ──
+        function toggleCategoria2() {
+            const toggle = document.getElementById('toggle-cat2');
+            const contenedor = document.getElementById('contenedor-cat2');
+            const camposInternos = document.getElementById('campos-internos-cat2');
+            const inputs = camposInternos.querySelectorAll('textarea, select');
+
+            if (toggle.checked) {
+                contenedor.classList.remove('cat-deshabilitada');
+                camposInternos.style.maxHeight = "500px";
+                camposInternos.style.opacity = "1";
+                inputs.forEach(input => input.disabled = false);
+            } else {
+                contenedor.classList.add('cat-deshabilitada');
+                camposInternos.style.maxHeight = "0px";
+                camposInternos.style.opacity = "0";
+                inputs.forEach(input => {
+                    input.disabled = true;
+                    input.value = "";
+                });
+            }
+        }
+        function toggleCategoria7() {
+            const toggle = document.getElementById('toggle-cat7');
+            const contenedor = document.getElementById('contenedor-cat7');
+            const camposInternos = document.getElementById('campos-internos-cat7');
+
+            if (!toggle || !contenedor || !camposInternos) return;
+
+            const inputs = camposInternos.querySelectorAll('textarea, select, input');
+
+            if (toggle.checked) {
+                contenedor.classList.remove('cat-deshabilitada');
+                camposInternos.style.maxHeight = "500px";
+                camposInternos.style.opacity = "1";
+
+                inputs.forEach(input => {
+                    input.disabled = false;
+                });
+
+            } else {
+
+                contenedor.classList.add('cat-deshabilitada');
+                camposInternos.style.maxHeight = "0px";
+                camposInternos.style.opacity = "0";
+
+                inputs.forEach(input => {
+                    input.disabled = true;
+                });
+            }
+        }
+
+        // ── Lógica Dinámica de la Bifurcación Optimizada ──
+        function setFlujo(tipo) {
+            const btnProf = document.getElementById('btn-profesional');
+            const btnInt = document.getElementById('btn-integral');
+            const personalContainer = document.getElementById('personal-fields');
+            const inputsPersonales = personalContainer.querySelectorAll('textarea, input');
+
+            const cat7 = document.getElementById('contenedor-cat7');
+            const toggleCat2 = document.getElementById('toggle-cat2');
+
+            if (tipo === 'profesional') {
+                btnProf.classList.add('active');
+                btnInt.classList.remove('active');
+                personalContainer.classList.add('hidden-mode');
+
+                inputsPersonales.forEach(input => {
+                    input.disabled = true;
+                });
+
+                // Automatización en Modo Profesional
+                const toggleCat7 = document.getElementById('toggle-cat7');
+
+                if (toggleCat7) {
+                    toggleCat7.checked = false;
+                    toggleCategoria7();
+                }
+
+                if (toggleCat2) {
+                    toggleCat2.checked = false;
+                    toggleCategoria2();
+                }
+                if (cat7) {
+                    cat7.classList.add('cat-deshabilitada');
+                }
+
+            } else {
+                btnInt.classList.add('active');
+                btnProf.classList.remove('active');
+                personalContainer.classList.remove('hidden-mode');
+
+                inputsPersonales.forEach(input => {
+                    input.disabled = false;
+                });
+
+                // Automatización en Modo Integral
+                const toggleCat7 = document.getElementById('toggle-cat7');
+
+                if (toggleCat7) {
+                    toggleCat7.checked = true;
+                    toggleCategoria7();
+                }
+
+                if (toggleCat2) {
+                    toggleCat2.checked = true;
+                    toggleCategoria2();
+                }
+                if (cat7) {
+                    cat7.classList.remove('cat-deshabilitada');
+                }
+
+            }
+            document.getElementById('form-vyo').dataset.flujo = tipo.toUpperCase();
+        }
+
+        // Inicializar por defecto en Modo Profesional
+        document.addEventListener('DOMContentLoaded', () => {
+            setFlujo('profesional');
+        });
+
+        function mostrarModalExito() {
+
+            document.getElementById("modal-exito").style.display = "flex";
+
+        }
+
+        function cerrarModalExito() {
+            const modal = document.getElementById("modal-exito");
+            if (!modal) return;
+
+            modal.classList.remove("visible");
+            modal.style.display = "none";
+        }
+
+        // NOTA: Las funciones de Envío, Recuperación de Datos (cargarDatos) y 
+        // Formateo Premium de la Clave de Aplicación han sido delegadas de forma
+        // unificada a validation.js para evitar colisiones y asegurar la correcta
+        // estructuración del JSON de categorías en el backend.
+    </script>
+    <script>
+
+
+        // 2. CONTROL DE CONTADORES DE CARACTERES (MÁXIMA CAPACIDAD)
+        const limit = 5000;
+        const textAreas = [
+            'tarea_profesional', 'fricciones_operativas', 'prioridades_delegacion',
+            'tipo_empleo', 'empresa', 'companeros', 'social_extra', 'obra_extra'
+        ];
+
+        textAreas.forEach(id => {
+            const area = document.getElementById(id);
+            const counter = document.getElementById('counter_' + id);
+            const alertBox = document.getElementById('alert_' + id);
+
+            if (area && counter) {
+                counter.innerText = `${area.value.length} / ${limit}`;
+                area.addEventListener('input', () => {
+                    const length = area.value.length;
+                    counter.innerText = `${length} / ${limit}`;
+                    if (length >= limit) {
+                        area.value = area.value.substring(0, limit);
+                        counter.classList.add('limit-reached');
+                        if (alertBox) alertBox.style.display = 'block';
+                    } else {
+                        counter.classList.remove('limit-reached');
+                        if (alertBox) alertBox.style.display = 'none';
+                    }
+                });
+            }
+        });
+
+        // 3. RENDERIZADOR DINÁMICO DE RESPUESTAS VISUALES
+        function mostrarAlertaVyo(mensaje, tipo) {
+            const alertBox = document.getElementById('vyo-alert-box');
+            if (!alertBox) return;
+
+            alertBox.style.display = 'block';
+            alertBox.innerText = mensaje;
+
+            if (tipo === 'exito') {
+                alertBox.style.backgroundColor = '#E8F5E9';
+                alertBox.style.border = '2px solid #2E7D32';
+                alertBox.style.color = '#1B5E20';
+            } else if (tipo === 'info') {
+                alertBox.style.backgroundColor = '#E3F2FD';
+                alertBox.style.border = '2px solid #1565C0';
+                alertBox.style.color = '#0D47A1';
+            } else {
+                alertBox.style.backgroundColor = '#FFEBEE';
+                alertBox.style.border = '2px solid #C62828';
+                alertBox.style.color = '#B71C1C';
+            }
+            alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // 4. RECARGA DINÁMICA DE REGISTROS (MÓDULO MULTIDOMINIO TOTAL)
+        // MARCADO A FUEGO: Este bloque es universal. Procesa y admite de forma nativa cuentas de
+        // Gmail, Hotmail, Outlook, Yahoo y cualquier extensión de dominio corporativo o privado.
+        async function cargarDatos() {
+            const emailInput = document.getElementById('email');
+            if (!emailInput || !emailInput.value.trim()) {
+                mostrarAlertaVyo('❌ Por favor, escribe tu dirección de correo electrónico principal para recargar los registros.', 'error');
+                return;
+            }
+
+            const email = emailInput.value.trim().toLowerCase();
+            const regexUniversal = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!regexUniversal.test(email)) {
+                mostrarAlertaVyo('❌ Estructura inválida. Verifique la dirección de correo ingresada.', 'error');
+                return;
+            }
+
+            mostrarAlertaVyo('⏳ Conectando con la base de datos local para recuperar tus configuraciones...', 'info');
+
+            try {
+                const respuesta = await fetch(`http://127.0.0.1:5000/cargar-datos?email=${encodeURIComponent(email)}`);
+                if (!respuesta.ok) throw new Error();
+
+                const datos = await respuesta.json();
+                if (datos) {
+                    if (datos.nombre) document.getElementById('nombre').value = datos.nombre;
+                    if (datos.celular) document.getElementById('celular').value = datos.celular;
+                    if (datos.apodo) document.getElementById('apodo').value = datos.apodo;
+                    if (datos.actividades) document.getElementById('actividades').value = datos.actividades;
+                    if (datos.familia) document.getElementById('familia').value = datos.familia;
+                    if (datos.amigos) document.getElementById('amigos').value = datos.amigos;
+                    if (datos.mascotas) document.getElementById('mascotas').value = datos.mascotas;
+                    if (datos.fechas) document.getElementById('fechas').value = datos.fechas;
+                    if (datos.vida_extra) document.getElementById('vida_extra').value = datos.vida_extra;
+
+                    if (datos.tarea_profesional) document.getElementById('tarea_profesional').value = datos.tarea_profesional;
+                    if (datos.fricciones_operativas) document.getElementById('fricciones_operativas').value = datos.fricciones_operativas;
+                    if (datos.prioridades_delegacion) document.getElementById('prioridades_delegacion').value = datos.prioridades_delegacion;
+                    if (datos.tipo_empleo) document.getElementById('tipo_empleo').value = datos.tipo_empleo;
+                    if (datos.empresa) document.getElementById('empresa').value = datos.empresa;
+                    if (datos.companeros) document.getElementById('companeros').value = datos.companeros;
+                    if (datos.social_extra) document.getElementById('social_extra').value = datos.social_extra;
+                    if (datos.obra_extra) document.getElementById('obra_extra').value = datos.obra_extra;
+
+                    if (datos.clave_aplicacion) {
+                        document.getElementsByName('clave_aplicacion')[0].value = datos.clave_aplicacion;
+                    }
+
+                    textAreas.forEach(id => {
+                        const area = document.getElementById(id);
+                        const counter = document.getElementById('counter_' + id);
+                        if (area && counter) counter.innerText = `${area.value.length} / ${limit}`;
+                    });
+
+                    mostrarAlertaVyo('🎉 ¡La Magia ha ocurrido! Tus registros guardados han sido recuperados con éxito.', 'exito');
+                }
+            } catch (error) {
+                mostrarAlertaVyo('💡 Correo disponible para nueva asignación o servidor local en reposo. Puede proceder a completar los casilleros.', 'info');
+            }
+        }
+
+    </script>
+    <script src="validation.js"></script>
+
+    <script>
+
+        function mostrarBadge(modo) {
+
+            const barra = document.getElementById("barra-modo");
+            const texto = document.getElementById("texto-modo");
+
+            if (!barra || !texto) return;
+
+            barra.style.display = "block";
+
+            if (modo === "manual") {
+
+                barra.className = "modo-manual";
+                texto.innerHTML = "✨ Estás en Modo MANUAL";
+
+            } else {
+
+                barra.className = "modo-auto";
+                texto.innerHTML = "⚙️ Estás en Modo AUTOMÁTICO";
+
+            }
+
+        }
+
+        function seleccionarModo(modo) {
+            // 1. Obtener los bloques principales
+            const pantallaInicial = document.getElementById("pantalla-inicial-auria");
+            const bloqueInstructivo = document.getElementById("bloque-instructivo-imap");
+            const bloqueCuestionario = document.getElementById("bloque-cuestionario");
+
+            // 2. Obtener elementos de control (Badge y Llave)
+            const barraModo = document.getElementById("barra-modo");
+            if (barraModo) barraModo.style.display = "none";
+            const bloqueClave = document.getElementById("bloque-llave-conexion");
+            const inputClave = document.querySelector('input[name="clave_aplicacion"]') || document.getElementById('llave-conexion');
+
+            // ════════════════════════════════════════════════
+            // CAMINO 1: MODO MANUAL
+            // ════════════════════════════════════════════════
+            if (modo === 'manual') {
+                // Muestra el Cuestionario directamente
+                if (pantallaInicial) pantallaInicial.style.display = "none";
+
+                if (bloqueCuestionario) bloqueCuestionario.style.display = "block";
+                if (bloqueInstructivo) bloqueInstructivo.style.display = "none";
+
+
+
+                // Configura Badge Dorado (Claudio UX)
+                mostrarBadge("manual");
+
+                // BLOQUEA y atenuá el campo de Llave de Conexión
+                if (bloqueClave) {
+                    bloqueClave.style.opacity = "0.4";
+                    bloqueClave.style.pointerEvents = "none";
+                }
+                if (inputClave) {
+                    inputClave.disabled = true;
+                    inputClave.removeAttribute("required");
+                    inputClave.value = ""; // Limpia el valor por seguridad
+                }
+
+                // ════════════════════════════════════════════════
+                // CAMINO 2: MODO AUTOMÁTICO
+                // ════════════════════════════════════════════════
+            } else if (modo === 'automatico') {
+                // Abre el paso intermedio (Instructivo IMAP)
+                if (pantallaInicial) pantallaInicial.style.display = "none";
+                if (bloqueCuestionario) bloqueCuestionario.style.display = "none";
+                if (bloqueInstructivo) bloqueInstructivo.style.display = "block";
+
+                // Configura Badge Azul (Claudio UX)
+                mostrarBadge("automatico");
+
+                // DESBLOQUEA la Llave de Conexión para cuando pase al Cuestionario
+                if (bloqueClave) {
+                    bloqueClave.style.opacity = "1";
+                    bloqueClave.style.pointerEvents = "auto";
+                }
+                if (inputClave) {
+                    inputClave.disabled = false;
+                    inputClave.setAttribute("required", "true");
+                }
+            }
+
+            document.getElementById('btn-volver-global').style.display = 'block';
+        }
+
+        // Función para avanzar desde el Instructivo al Cuestionario
+        function mostrarSoloInstructivo() {
+            window.location.href = '/ver-instructivo-prueba';
+        }
+
+        function irAlCuestionarioDesdeInstructivo() {
+
+            const bloqueInstructivo = document.getElementById("bloque-instructivo-imap");
+            const bloqueCuestionario = document.getElementById("bloque-cuestionario");
+
+            const bloqueClave = document.getElementById("bloque-llave-conexion");
+            const inputClave = document.getElementById("llave-conexion");
+
+            if (bloqueInstructivo) bloqueInstructivo.style.display = "none";
+            if (bloqueCuestionario) bloqueCuestionario.style.display = "block";
+
+            // Mostrar la barra fija
+            mostrarBadge("automatico");
+
+            // Activar la llave
+            if (bloqueClave) {
+                bloqueClave.style.opacity = "1";
+                bloqueClave.style.pointerEvents = "auto";
+            }
+
+            if (inputClave) {
+                inputClave.disabled = false;
+                inputClave.setAttribute("required", "true");
+            }
+
+        }
+
+        // Función para volver a la pantalla de selección
+        window.volverAlInicioHTML = function () {
+            const pantallaInicial = document.getElementById("pantalla-inicial-auria");
+            const bloqueInstructivo = document.getElementById("bloque-instructivo-imap");
+            const bloqueCuestionario = document.getElementById("bloque-cuestionario");
+            const barraModo = document.getElementById("barra-modo");
+            if (barraModo) barraModo.style.display = "none";
+
+            if (pantallaInicial) pantallaInicial.style.display = "block";
+            if (bloqueInstructivo) bloqueInstructivo.style.display = "none";
+            if (bloqueCuestionario) bloqueCuestionario.style.display = "none";
+            if (barraModo) barraModo.style.display = "none";
+
+            const inputClave = document.getElementById("llave-conexion");
+            const bloqueClave = document.getElementById("bloque-llave-conexion");
+
+            if (inputClave) {
+                inputClave.disabled = false;
+                inputClave.value = "";
+            }
+
+            if (bloqueClave) {
+                bloqueClave.style.opacity = "1";
+                bloqueClave.style.pointerEvents = "auto";
+            }
+
+            document.getElementById('btn-volver-global').style.display = 'none';
+        }
+    </script>
+
+</body>
+<!-- MODAL DE ÉXITO AUR+IA -->
+
+<div id="modal-exito" class="modal-exito">
+
+    <div class="modal-contenido">
+
+        <div class="modal-personajes">
+
+            <img src="imagenes_Cuestionario_VyO/AURhelios.png" id="img-aurhelios">
+            <img src="imagenes_Cuestionario_VyO/AURelia.png" id="img-aurelia">
+
+        </div>
+
+        <h2>
+
+            <span style="color:#F5A623;">AUR</span><span style="color:#4A7BA7;">+IA</span>
+
+        </h2>
+
+        <h3>
+
+            ¡Bienvenid@!
+
+        </h3>
+
+        <p>
+
+            Hemos recibido correctamente tu cuestionario de <strong>Vida y Obra</strong>.
+
+        </p>
+
+        <p>
+
+            A partir de este momento comenzaremos a conocerte para asistirte con inteligencia y empatía.
+
+        </p>
+
+        <p style="font-style:italic;color:#4A7BA7;">
+
+            "La inteligencia organiza. La empatía acompaña."
+
+        </p>
+
+        <button onclick="cerrarModalExito()">
+
+            Comenzar esta nueva etapa
+
+        </button>
+
+    </div>
+
+</div>
+
+</html>

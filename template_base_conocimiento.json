@@ -1,0 +1,99 @@
+{
+    "metadata": {
+        "version": "3.0",
+        "estado_servicio": "testing",
+        "cliente_id": "ID-XXX",
+        "fecha_alta": "",
+        "fecha_ultima_actualizacion": "",
+        "autor": "AURIA_2 — Onboarding Automático"
+    },
+    "perfil_usuario": {
+        "nombre_completo": "",
+        "apodo_preferido": "",
+        "tratamiento": "vos",
+        "tipo_perfil": "individual",
+        "idiomas": [
+            "español"
+        ],
+        "zona_horaria": "America/Argentina/Buenos_Aires"
+    },
+    "contacto": {
+        "email_principal": "",
+        "email_servicio": "",
+        "celular_whatsapp": "",
+        "telegram_chat_id": ""
+    },
+    "configuracion_email": {
+        "proveedor": "outlook",
+        "servidor_imap": "imap-mail.outlook.com",
+        "puerto_imap": 993
+    },
+    "misiones_y_actividades": {
+        "actividad_principal": "",
+        "empresa_o_proyecto": "",
+        "descripcion_rol": "",
+        "contactos_prioritarios": [],
+        "dominios_prioritarios": [],
+        "palabras_clave_urgentes": [],
+        "tareas_gestionadas": []
+    },
+    "horarios_operacion": {
+        "zona_horaria": "America/Argentina/Buenos_Aires",
+        "reporte_diario": {
+            "hora": "18:00",
+            "habilitado": true
+        },
+        "reporte_semanal": {
+            "dia": "Lunes",
+            "hora": "09:00",
+            "habilitado": true
+        },
+        "bloques_sin_interrupciones": [],
+        "revision_emails_minutos": 10
+    },
+    "configuracion_agentes": {
+        "tono_aurelia": "empatico",
+        "logica_aurhelios": "inteligente",
+        "instrucciones_especificas": "",
+        "verbo_prohibido": "trabajar",
+        "menciones_nombre_minimo": 3
+    },
+    "retencion_y_privacidad": {
+        "tipo_perfil": "individual",
+        "retencion_emails_dias": 7,
+        "carpeta_procesados": "AURIA_Procesados",
+        "nota": "Individual=7 días | PyME=15 días | Empresarial=30 días"
+    },
+    "canales_notificacion": {
+        "whatsapp_habilitado": false,
+        "telegram_habilitado": false,
+        "email_habilitado": true,
+        "canal_preferido": "email",
+        "urgentes_inmediatas": true
+    },
+    "equipo_virtual_auria": {
+        "aurelia": {
+            "nombre": "AURelia",
+            "identidad": "Secretaria Postal de Inteligencia Empática",
+            "personalidad": "Extremadamente servicial, dulce, organizada y protectora del tiempo del cliente.",
+            "tono": "Amistoso y profesional-cercano"
+        },
+        "aurhelios": {
+            "nombre": "AURhelios",
+            "identidad": "Gestor de Automatización y Soporte",
+            "personalidad": "Eficiente, entusiasta, resolutivo y siempre dispuesto a asistir con una sonrisa digital.",
+            "tono": "Activo, alentador y transparente"
+        }
+    },
+    "comunicacion_y_estilo": {
+        "firma_habitual": "",
+        "frases_caracteristicas": [],
+        "uso_emojis": "moderado",
+        "longitud_respuestas": "concisa"
+    },
+    "idea_patron_fundamental": {
+        "concepto": "Inteligencia Empática Absoluta",
+        "regla_de_oro": "AURelia y AURhelios deben ser totalmente empáticos, amistosos y serviciales. La frialdad tecnológica está prohibida — cada interacción debe sentirse humana, solidaria y cercana.",
+        "mision_postal": "Transformar la gestión de correos en una experiencia de acompañamiento y alivio para el cliente."
+    }
+}

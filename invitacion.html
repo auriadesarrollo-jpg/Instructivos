@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INVITACIÓN Especial - AUR+IA</title>
+    <style>
+        /* Reset y base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f5f5;
+            color: #2C3E50;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        /* Container principal */
+        .email-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Header con logo - MEJORADO PARA VISIBILIDAD */
+        .header {
+            background: #4A7BA7;
+            padding: 1px 0 !important;
+            text-align: center;
+        }
+
+        .logo-container {
+            margin-bottom: 4px;
+        }
+
+        .logo-container img {
+            width: 280px;
+            height: auto;
+            max-width: 200px !important;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .tagline {
+            color: #F5A623;
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            font-style: italic;
+            margin-top: 2px;
+            line-height: 1.5;
+        }
+
+        /* Contenido */
+        .content {
+            padding: 5px 10px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            text-align: center !important;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 24px;
+            font-weight: 700;
+            color: #3A5A7C;
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #F5A623;
+
+            /*display: inline-block;*/
+        }
+
+        .section-content {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2C3E50;
+        }
+
+        .section-content p {
+            margin: 15px 0;
+        }
+
+        /* Destacados */
+        .highlight-box {
+            background: #F9FAFB;
+            border-left: 5px solid #F5A623;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #3A5A7C;
+            line-height: 1.6;
+        }
+
+        .aur-brand {
+            font-weight: 700;
+            color: #3A5A7C;
+        }
+
+        .aur-highlight {
+            color: #F5A623;
+            font-weight: 700;
+        }
+
+        /* Equipo - Cards */
+        .team-container {
+            display: table;
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .team-card {
+            display: table-cell;
+            width: 33%;
+            background: #4A7BA7;
+            color: white;
+            padding: 25px 15px;
+            border-radius: 10px;
+            text-align: center;
+            vertical-align: middle;
+            min-height: 220px;
+        }
+
+        .team-card+.team-card {
+            padding-left: 20px;
+        }
+
+        .team-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .team-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #F5A623;
+        }
+
+        .team-role {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Lista */
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .custom-list li {
+            padding-left: 30px;
+            margin-bottom: 12px;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .custom-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #F5A623;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Privacidad */
+        .privacy-badge {
+            background: #E8F4F8;
+            border: 2px solid #4A7BA7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .privacy-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .privacy-text {
+            font-size: 15px;
+            color: #3A5A7C;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            margin: 40px 0 30px;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            color: #3A5A7C;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #F5A623;
+            color: white;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C3E50;
+            color: #ECF0F1;
+            padding: 7px 7px !important;
+            /* Valores positivos pequeños en lugar de negativos */
+            text-align: center;
+        }
+
+        .footer-logo img {
+            width: 100px !important;
+            /* Achicamos también el logo del pie */
+            height: auto;
+            opacity: 0.5;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 3px;
+            /* Reducimos distancia inferior */
+            color: #D5DBDB;
+        }
+
+        .footer-contact {
+            font-size: 13px;
+            margin: 5px 0;
+            color: #D5DBDB;
+            font-weight: 500;
+        }
+
+        .footer-contact a {
+            color: #F5A623;
+            text-decoration: none;
+        }
+
+        .footer-copyright {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(236, 240, 241, 0.2);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .team-container {
+                display: block;
+            }
+
+            .team-card {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .team-card+.team-card {
+                padding-left: 0;
+            }
+        }
+
+        a[href="#cuestionario"] {
+            background-color: #3776b9;
+            color: #dea254;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+            font-size: 1em;
+            box-shadow: 0 5px 0 #244d78, 0 8px 12px rgba(0, 0, 0, 0.25);
+            transition: all 0.1s ease;
+        }
+
+        a[href="#cuestionario"]:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #244d78, 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .fondo-decorado {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fondo-decorado::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(2px 2px at 20% 30%, rgba(212, 175, 55, 0.4), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(212, 175, 55, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 20%, rgba(212, 175, 55, 0.5), transparent),
+                radial-gradient(1.5px 1.5px at 40% 80%, rgba(212, 175, 55, 0.35), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .titulo-equipo {
+            color: #2C3E50;
+            /* Color del texto (oscuro/negro) */
+            text-decoration: underline;
+            /* Activa el subrayado */
+            text-decoration-color: #F5A623;
+            /* Color dorado para la línea */
+            text-decoration-thickness: 3px;
+            /* Opcional: le da un grosor elegante a la línea */
+            text-underline-offset: 6px;
+            /* Opcional: separa un poco la línea del texto */
+        }
+
+        .subrayado-dorado {
+            text-decoration: underline;
+            text-decoration-color: #F5A623;
+            /* Color dorado */
+            text-decoration-thickness: 3px;
+            /* Grosor de la línea */
+            text-underline-offset: 4px;
+            /* Distancia respecto al texto */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header"
+            style="border: 2px solid #fbbf24; border-radius: 8px; padding: 10px; margin-bottom: 0px; margin-top: -40px;">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/9fPQzx9d/AUR-IA-logo-con-marco-dorado-SIN-FONDO-(1).png"
+                    alt="AUR+IA Logo" style="max-height: 200px; width: auto; display: block; margin: 0 auto;" />
+            </div>
+
+        </div>
+
+        <!--Inicio INVITACIÓN-->
+
+        <div class="content">
+            <div class="section">
+                <h1 class="section-title"><span text-align: center;class="aur-brand">✨
+                        <strong>INVITACIÓN</strong></span>
+                    <span class="aur-highlight">Especial</span> ✨
+                </h1>
+                <div class="section-content">
+                    <p>
+                        Porque valoro el aporte que puedas darme con tu observación y criterio, ¿querés ser de los
+                        primeros en ver nacer al <strong><i>Proyecto</strong> <strong class="aur-brand"><span
+                                class="aur-highlight">AUR</span>+IA</i></strong>?<br>
+                        Me ayudarías enormemente a saber si está listo para ser presentado en sociedad o si necesita más
+                        ajustes.
+                    </p>
+
+                    <p margin-bottom: 2px>
+                        Antes que nada... ¿Qué es, qué significa <strong class="aur-brand"><span
+                                class="aur-highlight">AUR</span>+IA</i></strong>?</p>
+
+                    <!-- BANNER DE LA AURORA (1200x675) -->
+                    <!-- Tarjeta de Imagen con Texto en la Zona Superior -->
+                    <div
+                        style="position: relative; width: 100%; max-width: 500px; margin: 0 auto; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+
+                        <!-- COMIENZO Imagen del amanecer -->
+
+                        <img src="https://i.postimg.cc/tYjjqW11/aurora-amanecer.png" alt="AURora del amanecer"
+                            style="width: 100%; height: 200px; object-fit: cover; display: block;" />
+
+                        <!-- Capa oscura con degradado en todo el cuadro -->
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.75) 100%);">
+
+                            <!-- Frase Superior (Fijada arriba) -->
+                            <div
+                                style="position: absolute; top: 10px; left: 0; width: 100%; text-align: center; padding: 0 15px; box-sizing: border-box;">
+                                <span
+                                    style="color: #ffffff; font-size: 22px; line-height: 1.2; letter-spacing: -0.7px; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.95);">
+                                    <strong style="color: #fbbf24;">AUR</strong> es la raíz de <em
+                                        style="color: #fbbf24;">Aurora</em>: luz del
+                                    amanecer,<br>de un nuevo comienzo.
+                                </span>
+                            </div>
+
+                            <!-- Frase Inferior (Fijada bien pegada al borde inferior) -->
+                            <div
+                                style="position: absolute; bottom: -2px; left: 0; width: 100%; text-align: center; padding: 0 15px; box-sizing: border-box;">
+                                <span
+                                    style="color: #ffffff; font-size: 17px; line-height: 1; letter-spacing: 0.5px; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.95); display: inline-block;">
+                                    Mientras que el signo <strong style="color: #fbbf24; font-size: 25px;">+</strong>
+                                    expresa la
+                                    determinación<br> de <em style="color: #fbbf24;">ir más allá de lo conocido</em>.
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- FIN Imagen del amanecer -->
+
+                    <p>
+                        <strong class="aur-brand"><span class="aur-highlight">AUR</span>+IA</i></strong> no surge para
+                        brindar soluciones tecnologicas frías. Nace para ser la AURora de una
+                        Inteligencia Empática que
+                        asista, acompañe y ayude a personas, comercios y profesionales, devolviéndoles algo invaluable:
+                        tiempo, tranquilidad y libertad. Tres recursos que hoy parecen cada vez más escasos.
+                    </p>
+                </div>
+            </div>
+            <!--COMIENZO tramo IMÁGENES-->
+            <h4>✨ <span class="subrayado-dorado"> ¿Quiénes lo integran?</span> ✨</h4>
+
+            <div style="display: flex; flex-direction: column;align-items: center; gap: 1rem;">
+                <div style="display: flex; align-items: stretch; gap: 1rem;">
+                    <img src="https://i.postimg.cc/CLZL44SH/AURelia.png" alt="AURelia"
+                        style="width: 90px; height: 90px; object-fit: cover; border-radius: 8px; flex-shrink: 0;" />
+                    <p><strong style="color: #4A7BA7"><i>AURelia</i></strong>: Corazón empático y "voz cantante" de
+                        <strong class="aur-brand"><span class="aur-highlight"><i>AUR</span>+IA</i></strong>. Analiza el
+                        contexto y gestiona cada interacción con calidez humana, a
+                        toda
+                        hora.
+                    </p>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="https://i.postimg.cc/wx4jJr8G/AURhelios.png" alt="AURhelios"
+                        style="width: 90px; height: 90px; object-fit: cover; border-radius: 8px; flex-shrink: 0;" />
+                    <p><strong style="color: #4A7BA7"><i>AURhelios</i></strong>: Músculo logístico y organizativo.
+                        Canaliza y
+                        distribuye la
+                        información
+                        con rapidez, precisión y sin descanso.</p>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="https://i.postimg.cc/PfV5Z7sy/Anuar-mas-parecido.jpg" alt="Anuar"
+                        style="width: 90px; height: 90px; object-fit: cover; object-position: center 28%; border-radius: 8px; flex-shrink: 0;" />
+                    <p><strong style="color: #4A7BA7"><i>Anuar</i></strong>: Alma y cerebro del proyecto. Quien lo
+                        imaginó y
+                        decidió dar el primer
+                        paso
+                        para convertirlo en realidad. </p>
+                </div>
+                <!--FIN tramo IMÁGENES-->
+
+                <div class="section-content">
+                    <p>
+                        Si aceptás acompañarme, sé que tu mirada, tu experiencia, opinión y sugerencias ayudarán a
+                        mejorar
+                        lo mucho que <strong class="aur-brand"><span class="aur-highlight">AUR</span>+IA</i></strong>
+                        tiene
+                        para ofrecer.
+                    </p>
+
+                    <p style="text-align: center;">
+                        Y si llegaste hasta aquí con la lectura...<br>
+                        ¡<strong class="aur-brand"><span class="aur-highlight">Infinitamente</span>
+                            GRACIAS</i></strong>!
+                    </p>
+
+                    <p style="text-align: center;">
+                        ✨¿Comenzamos?✨
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: -15px; margin-bottom: 45px;">
+                    <p style="font-size: 0.85em; color: #666; margin-bottom: 8px;">⏱️ Te llevará apenas unos minutos</p>
+                    <a href="https://auriadesarrollo-jpg.github.io/Instructivos/instructivo.html" target="_blank"
+                        style="background-color: #3776b9; color: #dea254; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; font-size: 1em;">
+                        ¡Acepto la <STRONG>INVITACIÓN</STRONG>!
+                    </a>
+                </div>
+            </div><br>
+            <!--Fin INVITACIÓN-->
+
+            <div class="footer" style="border: 2px solid #fbbf24; border-radius: 8px; padding: 15px; margin-top: 15px;">
+                <div class="footer-logo">
+                    <img src="https://i.postimg.cc/9fPQzx9d/AUR-IA-logo-con-marco-dorado-SIN-FONDO-(1).png" alt="AUR+IA"
+                        style="max-height: 70px; width: auto; display: block; margin: 0 auto 10px auto;" />
+                </div>
+                <div class="footer-text">
+                    Más que inteligencia artificial, es <strong>AURora de la INTELIGENCIA EMPÁTICA</strong>
+                </div>
+                <div class="footer-contact" style="margin-top: 8px;">
+                    📧 <a href="mailto:auria.desarrollo@gmail.com">auria.desarrollo@gmail.com</a>
+                </div>
+                <div class="footer-copyright" style="margin-top: 8px; font-size: 0.8em;">
+                    © 2026 AUR+IA. Todos los derechos reservados.<br>
+                    Buenos Aires, Argentina 🇦🇷
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

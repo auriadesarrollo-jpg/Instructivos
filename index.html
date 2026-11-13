@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuestionario VyO</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_Cuestionario_VyO/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_Cuestionario_VyO/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_Cuestionario_VyO/favicon-16x16.png">
-    <link rel="manifest" href="favicon_Cuestionario_VyO/site.webmanifest">
-    <link rel="mask-icon" href="favicon_Cuestionario_VyO/safari-pinned-tab.svg" color="#4a7ba7">
-    <link rel="shortcut icon" href="favicon_Cuestionario_VyO/favicon.ico">
-    <meta name="msapplication-TileColor" content="#4a7ba7">
-    <meta name="msapplication-config" content="favicon_Cuestionario_VyO/browserconfig.xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_cuestionario/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_cuestionario/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_cuestionario/favicon-16x16.png">
+    <link rel="manifest" href="favicon_cuestionario/site.webmanifest">
+    <link rel="shortcut icon" href="favicon_cuestionario/favicon.ico">
     <meta name="theme-color" content="#ffffff">
 
     <style>
@@ -1391,7 +1388,7 @@
 
 
             <h2 style="color:#4A7BA7;">📖 Cómo activar tu Modo AUTOMÁTICO</h2>
-            <p style="text-align:left; color:#555;">
+            <p id="texto-llave-conexion" style="text-align:left; color:#555;">
                 Para que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
                     style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
                     style="color: #F5A623; font-weight: bold;">AUR</span><span
@@ -1481,21 +1478,33 @@
                 un segundo se hace La Magia!
             </div>
 
-            <form id="form-vyo">
+            <form id="form-vyo" autocomplete="off">
 
                 <!--=====================================================-->
                 <!-- BLOQUE LLAVE DE CONEXIÓN (Dinamizado por JS)          -->
                 <!-- ===================================================== -->
                 <div id="bloque-llave-conexion"
                     style="margin-top: 25px; background-color: #F9FBFF; padding: 20px; border: 2px solid #4A7BA7; border-radius: 8px; transition: opacity 0.3s ease;">
+
                     <label
                         style="display: block; font-weight: bold; color: #4A7BA7; margin-bottom: 10px; font-size: 1.1em;">
-                        ➔ Pega aquí tu Llave de Conexión (16 letras):
+                        ➔ Pegá a la Contraseña de aplicación de tu correo (16 letras):
                     </label>
-                    <input type="text" name="clave_aplicacion" id="llave-conexion" placeholder="abcd efgh ijkl mnop"
-                        style="border: 2px solid #F5A623; font-family: monospace; font-size: 1.3em; text-align: center; width: 100%;">
+
+                    <!-- AQUÍ ESTÁ EL ÚNICO CAMBIO: El input ahora arranca como "password" y lleva el botón del ojito -->
+                    <div style="position: relative; width: 100%;">
+                        <input type="password" name="clave_aplicacion" id="llave-conexion"
+                            placeholder="abcd efgh ijkl mnop"
+                            style="border: 2px solid #F5A623; font-family: monospace; font-size: 1.3em; text-align: center; width: 100%; padding-right: 45px; box-sizing: border-box;">
+                        <button type="button" id="toggle-password"
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.2em; color: #666;"
+                            title="Mostrar u ocultar contraseña">
+                            👁️
+                        </button>
+                    </div>
+
                     <small style="color: #736c6c; display: block; margin-top: 10px; line-height: 1.4;">
-                        <strong>* Esta llave se encriptará inmediatamente en tu archivo de cliente para tu total
+                        <strong>Esta llave se encriptará inmediatamente en tu archivo de cliente para tu total
                             seguridad.</strong>
                     </small>
                 </div>
@@ -1585,71 +1594,119 @@
                 <!-- SECCIÓN: TU VIDA -->
                 <div class="seccion-card vida-bg">
                     <h2>Tu Vida...</h2>
-                    <div class="campo-grupo">
+
+                    <!-- 1. EMAIL (Visible únicamente en Modo AUTOMÁTICO) -->
+                    <div class="campo-grupo" id="bloque-email">
                         <label>Email <span style="font-size: 17px; color: rgb(177, 172, 177);">(escribe tu dirección
                                 principal)</span></label>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="email" name="email_contacto" id="email" required placeholder="tu@email.com"
-                                autocomplete="email">
-                            <input type="hidden" name="email_servicio" value="auria.desarrollo@gmail.com">
-                            <button type="button" class="btn-cargar" onclick="cargarDatos()">RECARGAR<br> MIS
-                                DATOS</button>
-                        </div>
+                        <input type="email" name="email_contacto" id="email" required placeholder="tu@email.com"
+                            autocomplete="email">
+                        <input type="hidden" name="email_servicio" value="auria.desarrollo@gmail.com">
                     </div>
+
+                    <!-- 2. NOMBRE COMPLETO (Visible en ambos modos) -->
                     <div class="campo-grupo">
                         <label>Nombre completo</label>
                         <textarea name="nombre" id="nombre" rows="1"></textarea>
                     </div>
+
+                    <!-- 3. CÓDIGO USUARIO + BOTÓN ÚNICO DE RECARGA (Visible en ambos modos) -->
+                    <div class="campo-grupo" id="bloque-usu" style="margin-bottom: 20px;">
+                        <label>
+                            Código de Usuario
+                            <span style="font-size: 15px; color: #777; font-weight: normal;">
+                                (si es tu primera vez, déjalo en blanco; si ya posees uno o ingresaste tu móvil,
+                                presiona recargar)
+                            </span>
+                        </label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" name="codigo_usu" id="codigo_usu" placeholder="Ej: USU-0001"
+                                autocomplete="off" data-lpignore="true" style="flex: 1; text-transform: uppercase;">
+                            <button type="button" class="btn-cargar" onclick="cargarDatos()">
+                                RECARGAR<br>MIS DATOS
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 4. MÓVIL (Visible en ambos modos) -->
                     <div class="mb-3">
-                        <label for="celular" class="form-label">Móvil <span
-                                style="font-size: 17px; color: rgb(177, 172, 177);">-ingresa tu número sin espacios
-                                y en
-                                formato internacional, tal como aparece en tu perfil de WhatsApp-, de esta
-                                manera:</span></label>
+                        <label for="celular" class="form-label">
+                            Móvil <span style="font-size: 17px; color: rgb(177, 172, 177);">-ingresa tu número sin
+                                espacios y en formato internacional, tal como aparece en tu perfil de WhatsApp-, de esta
+                                manera:</span>
+                        </label>
                         <input type="tel" id="celular" name="celular" placeholder="+5491162345678"
                             pattern="^\+?[0-9\s\-]+$">
-                    </div><br>
+                    </div>
+                    <br>
+                    <br>
 
                     <!-- SUB-CONTENEDOR DE CAMPOS EXCLUSIVAMENTE PERSONALES (Se ocultan/deshabilitan dinámicamente) -->
                     <div id="personal-fields" class="personal-subcontainer">
-                        <div class="campo-grupo"><label>¿Con qué apodos te nombran tus familiares y
-                                amigos?</label><textarea name="apodo" id="apodo" rows="1"></textarea></div>
-                        <div class="campo-grupo"><label>Compartinos la lista de tus actividades personales <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">-actividades del espíritu,
-                                    de la
-                                    mente, artísticas, deportivas, hobbies, etcétera-</span></label><textarea
-                                name="actividades" id="actividades" rows="2"></textarea></div>
-                        <div class="campo-grupo"><label>¿Quiénes son los miembros de tu círculo familiar? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a
-                                    continuación-</span></label><textarea name="familia" id="familia"
-                                rows="2"></textarea>
+                        <div class="campo-grupo">
+                            <label>¿Con qué apodos te nombran tus familiares y amigos?</label>
+                            <textarea name="apodo" id="apodo" rows="1"></textarea>
                         </div>
-                        <div class="campo-grupo"><label>¿Quiénes son tus amigos cercanos? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a continuación
-                                    con
-                                    <strong>APELLIDO</strong> de ser posible, para distinguirlos de otros con igual
-                                    nombre-</span></label><textarea name="amigos" id="amigos" rows="2"></textarea>
+
+                        <div class="campo-grupo">
+                            <label>
+                                Compartinos la lista de tus actividades personales
+                                <span style="font-size: 17px; color: rgb(177, 172, 177);">-actividades del espíritu, de
+                                    la mente, artísticas, deportivas, hobbies, etcétera-</span>
+                            </label>
+                            <textarea name="actividades" id="actividades" rows="2"></textarea>
                         </div>
-                        <div class="campo-grupo"><label>¿Tienes mascotas? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a
-                                    continuación si lo consideras nacesario-</span></label><textarea name="mascotas"
-                                id="mascotas" rows="1"></textarea>
+
+                        <div class="campo-grupo">
+                            <label>
+                                ¿Quiénes son los miembros de tu círculo familiar?
+                                <span style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a
+                                    continuación-</span>
+                            </label>
+                            <textarea name="familia" id="familia" rows="2"></textarea>
                         </div>
-                        <div class="campo-grupo"><label>¿Fechas de cumpleaños, fechas de aniversarios, fechas de
-                                eventos
-                                para recordar? <span style="font-size: 17px; color: rgb(177, 172, 177);">-el detalle
-                                    a
-                                    continuación-</span></label><textarea name="fechas" id="fechas" rows="2"></textarea>
+
+                        <div class="campo-grupo">
+                            <label>
+                                ¿Quiénes son tus amigos cercanos?
+                                <span style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a continuación
+                                    con <strong>APELLIDO</strong> de ser posible, para distinguirlos de otros con igual
+                                    nombre-</span>
+                            </label>
+                            <textarea name="amigos" id="amigos" rows="2"></textarea>
                         </div>
-                        <div class="campo-grupo"><label>¿Hay otros datos de importancia que tanto <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> deban saber para
-                                asistirte
-                                mejor? <span style="font-size: 17px; color: rgb(177, 172, 177);">-cuéntanos a
-                                    continuación-</span></label><textarea name="vida_extra" id="vida_extra"
-                                rows="3"></textarea></div>
+
+                        <div class="campo-grupo">
+                            <label>
+                                ¿Tienes mascotas?
+                                <span style="font-size: 17px; color: rgb(177, 172, 177);">-menciónalos a continuación si
+                                    lo consideras nacesario-</span>
+                            </label>
+                            <textarea name="mascotas" id="mascotas" rows="1"></textarea>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label>
+                                ¿Fechas de cumpleaños, fechas de aniversarios, fechas de eventos para recordar?
+                                <span style="font-size: 17px; color: rgb(177, 172, 177);">-el detalle a
+                                    continuación-</span>
+                            </label>
+                            <textarea name="fechas" id="fechas" rows="2"></textarea>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label>
+                                ¿Hay otros datos de importancia que tanto
+                                <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y
+                                <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> deban saber para asistirte
+                                mejor?
+                                <span style="font-size: 17px; color: rgb(177, 172, 177);">-cuéntanos a
+                                    continuación-</span>
+                            </label>
+                            <textarea name="vida_extra" id="vida_extra" rows="3"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -1831,708 +1888,754 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN: CATEGORÍAS POSTALES -->
-                <div class="seccion-card relacion-bg">
-                    <h2>Tu relación con Nosotros...</h2>
-                    <p style="margin-bottom: 25px;">Para que <span
-                            style="color: #F5A623; font-weight: bold;">AUR</span><span
-                            style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                            style="color: #F5A623; font-weight: bold;">AUR</span><span
-                            style="color: #4A7BA7; font-weight: bold;">helios</span> traten tu correspondencia con
-                        eficiencia, tus correos se clasificarán en las <strong><u>9 categorías</u></strong> que te
-                        detallamos a continuación.<br> El objetivo de <span
-                            style="color: #F5A623; font-weight: bold;">AUR</span><span
-                            style="color: #4A7BA7; font-weight: bold;">+IA</span> es que recibas reportes diarios
-                        para
-                        que
-                        estés informad@ de todo cuanto recibas.</p>
 
-                    <!-- Categoría 1 -->
-                    <div class="cat-box cat-box-1">
-                        <label><span class="cat-titulo-1">🟣 1_ Emails URGENTES — Gestión Inmediata</span></label>
-                        <p style="font-size: 0.92em; color: #5a3d7a; margin-bottom: 10px;">
-                            <em>Incluirá toda info que consideres <strong>Sensible</strong>, por ejemplo: sobre
-                                salud,
-                                Bancos, Seguros, judiciales, vivienda/consorcio, vencimientos impostergables (Obra
-                                Social,
-                                Impuestos, Tarjetas), resultados médicos, material de estudio de la
-                                facultad/colegio,
-                                avisos
-                                barriales, etcétera.</em>
-                        </p>
-                        <p>Estos emails serán etiquetados como <span class="urgente-label">URGENTE</span> y bajo un
-                            tratamiento expeditivo -se te informará de inmediato-.</p>
 
-                        <div class="campo-personalizado">
-                            <span class="campo-personalizado-titulo" style="color: #8A2BE2;">⭐ Si tienes otras
-                                situaciones
-                                que hay que seguir de cerca, agrégalas con todo detalle en el campo a
-                                continuación:</span>
-                            <span class="campo-personalizado-ejemplos">Ejemplos: "Estudio Jurídico XXX por mi
-                                litigio
-                                comercial" — "consorcio de mi edificio" — "Dr. Fulano de Tal, médico de mi
-                                mamá"</span>
-                            <textarea name="cat1_personalizado" id="cat1_personalizado" rows="2"
-                                placeholder="Escribí lo que consideres vital para que AURelia y AURhelios te aprendan..."></textarea>
-                        </div>
-                        <div class="campo-personalizado" style="margin-top: 10px;">
-                            <span class="campo-personalizado-titulo" style="color: #8A2BE2;">⭐ ¿Tienes remitentes
-                                clave
-                                que
-                                SIEMPRE deben estar en la categoría de URGENTE?</span>
-                            <span class="campo-personalizado-ejemplos">Ejemplos: "dr.garcia@consultorio.com" —
-                                "Hospital
-                                YYY" — "cualquier email de @bancozzz.com.ar" — "mi contadora Susana H."</span>
-                            <textarea name="cat1_remitentes" id="cat1_remitentes" rows="2"
-                                placeholder="Agrega nombre completo, emails o dominios de remitentes que no te deben faltar..."></textarea>
-                        </div><br>
+                <!-- CONTENEDOR PADRE QUE ENVOLVERÁ LAS 9 CATEGORÍAS -->
+                <div id="seccion-categorias">
 
-                        <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                    <!-- SECCIÓN: CATEGORÍAS POSTALES -->
+                    <div class="seccion-card relacion-bg">
+                        <h2>Tu relación con Nosotros...</h2>
+                        <p style="margin-bottom: 25px;">Para que <span
+                                style="color: #F5A623; font-weight: bold;">AUR</span><span
                                 style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
                                 style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                            categoría?
-                        </p>
-                        <select name="cat1_modo" id="cat1_modo">
-                            <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                por
-                                mí y
-                                que AURhelios envíe el correo -respuesta automática-.</option>
-                            <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                respuesta
-                                y
-                                que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
-                            <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                "Borradores"
-                                para yo responderlo luego -emails no respondidos-.</option>
-                        </select>
-                        <label
-                            style="display: inline-block; margin-top: 15px; line-height: 1.4; vertical-align: top;">¿Con
-                            qué tono prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                style="color: #4A7BA7; font-weight: bold;">elia</span> se dirija a estas personas e
-                            instituciones? <span style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Formal,
-                                urgente,
-                                directo).</span></label>
-                        <textarea name="cat1_tono" id="cat1_tono" rows="1"></textarea>
-                    </div>
+                                style="color: #4A7BA7; font-weight: bold;">helios</span> traten tu correspondencia con
+                            eficiencia, tus correos se clasificarán en las <strong><u>9 categorías</u></strong> que te
+                            detallamos a continuación.<br> El objetivo de <span
+                                style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">+IA</span> es que recibas reportes diarios
+                            para
+                            que
+                            estés informad@ de todo cuanto recibas.</p>
 
-                    <!-- Categoría 2 -->
-                    <div id="contenedor-cat2" class="cat-box cat-box-2" style="transition: all 0.4s ease;">
-                        <div
-                            style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; margin-bottom: 15px;">
-                            <div style="max-width: 80%;">
-                                <label style="margin: 0;"><span class="cat-titulo-2">🟢 2_ Familia y Amigos
-                                        Cercanos</span></label>
-                                <p style="font-size: 0.85rem; color: #555; margin: 4px 0 0 0; font-style: italic;">
-                                    ¿Deseás habilitar esta categoría para que los asistentes organicen tu
-                                    correspondencia
-                                    personal en carpetas separadas?
+                        <!-- Categoría 1 -->
+                        <div class="cat-box cat-box-1">
+                            <label><span class="cat-titulo-1">🟣 1_ Emails URGENTES — Gestión Inmediata</span></label>
+                            <p style="font-size: 0.92em; color: #5a3d7a; margin-bottom: 10px;">
+                                <em>Incluirá toda info que consideres <strong>Sensible</strong>, por ejemplo: sobre
+                                    salud,
+                                    Bancos, Seguros, judiciales, vivienda/consorcio, vencimientos impostergables (Obra
+                                    Social,
+                                    Impuestos, Tarjetas), resultados médicos, material de estudio de la
+                                    facultad/colegio,
+                                    avisos
+                                    barriales, etcétera.</em>
+                            </p>
+                            <p>Estos emails serán etiquetados como <span class="urgente-label">URGENTE</span> y bajo un
+                                tratamiento expeditivo -se te informará de inmediato-.</p>
+
+                            <div class="campo-personalizado">
+                                <span class="campo-personalizado-titulo" style="color: #8A2BE2;">⭐ Si tienes otras
+                                    situaciones
+                                    que hay que seguir de cerca, agrégalas con todo detalle en el campo a
+                                    continuación:</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "Estudio Jurídico XXX por mi
+                                    litigio
+                                    comercial" — "consorcio de mi edificio" — "Dr. Fulano de Tal, médico de mi
+                                    mamá"</span>
+                                <textarea name="cat1_personalizado" id="cat1_personalizado" rows="2"
+                                    placeholder="Escribí lo que consideres vital para que AURelia y AURhelios te aprendan..."></textarea>
+                            </div>
+                            <div class="campo-personalizado" style="margin-top: 10px;">
+                                <span class="campo-personalizado-titulo" style="color: #8A2BE2;">⭐ ¿Tienes remitentes
+                                    clave
+                                    que
+                                    SIEMPRE deben estar en la categoría de URGENTE?</span>
+                                <span class="campo-personalizado-ejemplos">Ejemplos: "dr.garcia@consultorio.com" —
+                                    "Hospital
+                                    YYY" — "cualquier email de @bancozzz.com.ar" — "mi contadora Susana H."</span>
+                                <textarea name="cat1_remitentes" id="cat1_remitentes" rows="2"
+                                    placeholder="Agrega nombre completo, emails o dominios de remitentes que no te deben faltar..."></textarea>
+                            </div><br>
+
+                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                categoría?
+                            </p>
+                            <select name="cat1_modo" id="cat1_modo">
+                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
+                                    por
+                                    mí y
+                                    que AURhelios envíe el correo -respuesta automática-.</option>
+                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                    respuesta
+                                    y
+                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
+                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                    "Borradores"
+                                    para yo responderlo luego -emails no respondidos-.</option>
+                            </select>
+                            <label
+                                style="display: inline-block; margin-top: 15px; line-height: 1.4; vertical-align: top;">¿Con
+                                qué tono prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                    style="color: #4A7BA7; font-weight: bold;">elia</span> se dirija a estas personas e
+                                instituciones? <span style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Formal,
+                                    urgente,
+                                    directo).</span></label>
+                            <textarea name="cat1_tono" id="cat1_tono" rows="1"></textarea>
+                        </div>
+
+                        <!-- Categoría 2 -->
+                        <div id="contenedor-cat2" class="cat-box cat-box-2" style="transition: all 0.4s ease;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; margin-bottom: 15px;">
+                                <div style="max-width: 80%;">
+                                    <label style="margin: 0;"><span class="cat-titulo-2">🟢 2_ Familia y Amigos
+                                            Cercanos</span></label>
+                                    <p style="font-size: 0.85rem; color: #555; margin: 4px 0 0 0; font-style: italic;">
+                                        ¿Deseás habilitar esta categoría para que los asistentes organicen tu
+                                        correspondencia
+                                        personal en carpetas separadas?
+                                    </p>
+                                </div>
+                                <label class="switch-control">
+                                    <input type="checkbox" id="toggle-cat2" checked onchange="toggleCategoria2()">
+                                    <span class="slider-toggle"></span>
+                                </label>
+                            </div>
+
+
+                            <!-- Categoría 2 clonada (Estructura fluida adaptada de la Cat 3) -->
+                            <div class="cat-box cat-box-2">
+                                <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                        style="color:#39893e">PRIORIDAD ALTA</span>...</p>
+
+                                <div class="campo-personalizado">
+                                    <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Qué contactos
+                                        quieres
+                                        incluir en esta categoría?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos: "mamá Rosa" — "hermana Claudia"
+                                        —
+                                        "amigo José Diomedi" — "prima Roxana Rico" — "amiga María de la facultad"</span>
+                                    <textarea name="cat2_contactos" id="cat2_contactos" rows="2"
+                                        placeholder="Nombres o emails de familia y amigos cercanos -con APELLIDO de ser posible-..."></textarea>
+                                </div><br>
+
+                                <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                    categoría?
                                 </p>
+
+                                <select name="cat2_modo" id="cat2_modo">
+                                    <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la
+                                        respuesta
+                                        por
+                                        mí y que AURhelios envíe el correo -respuesta automática-.</option>
+                                    <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                        respuesta
+                                        y que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                    </option>
+                                    <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                        "Borradores" para yo responderlo luego -emails no respondidos-.</option>
+                                </select>
+
+                                <label style="margin-top:15px; display: block; line-height: 1.4;">¿Con qué tono
+                                    prefieres
+                                    que
+                                    <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> se dirija a tus seres
+                                    queridos?
+                                    <span
+                                        style="display: block; font-size: 15px; color: rgb(177, 172, 177); font-weight: normal; margin-top: 4px;">(Ej:
+                                        Cariñoso, breve, divertido).</span>
+                                </label>
+
+                                <textarea name="cat2_tono" id="cat2_tono" rows="1"></textarea>
                             </div>
-                            <label class="switch-control">
-                                <input type="checkbox" id="toggle-cat2" checked onchange="toggleCategoria2()">
-                                <span class="slider-toggle"></span>
-                            </label>
-                        </div>
+                            <!--fin categoría 2 clonada-->
 
+                            <!-- Categoría 3 -->
+                            <div class="cat-box cat-box-3">
+                                <label><span class="cat-titulo-3">🟢 3_ Turnos Programados, Vencimientos y
+                                        Recordatorios</span></label>
+                                <p style="font-size: 0.92em; color: #1a5c1a; margin-bottom: 10px;">
+                                    <em>A modo de ejemplo, puede incluir: citas médicas programadas, turno podología,
+                                        vencimientos
+                                        ordinarios
+                                        como
+                                        cuota del club, Netflix, Spotify, gimnasio y otras suscripciones de ocio,
+                                        etcétera.</em>
+                                </p>
+                                <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                        style="color: #1a7a1a;">PRIORIDAD
+                                        ALTA</span>...</p>
 
-                        <!-- Categoría 2 clonada (Estructura fluida adaptada de la Cat 3) -->
-                        <div class="cat-box cat-box-2">
-                            <p>Estos emails serán etiquetados como <span class="urgente-label"
-                                    style="color:#39893e">PRIORIDAD ALTA</span>...</p>
+                                <div class="campo-personalizado">
+                                    <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Hay vencimientos o
+                                        turnos
+                                        específicos que quieras destacar?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos: "vencimiento de la cuota del
+                                        auto
+                                        el
+                                        día 10
+                                        de cada mes" — "turno semestral con el cardiólogo" — "renovación del seguro del
+                                        auto
+                                        en
+                                        agosto"</span>
+                                    <textarea name="cat3_personalizado" id="cat3_personalizado" rows="2"
+                                        placeholder="Describí vencimientos o turnos habituales de importancia para vos..."></textarea>
+                                </div><br>
 
-                            <div class="campo-personalizado">
-                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Qué contactos quieres
-                                    incluir en esta categoría?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "mamá Rosa" — "hermana Claudia" —
-                                    "amigo José Diomedi" — "prima Roxana Rico" — "amiga María de la facultad"</span>
-                                <textarea name="cat2_contactos" id="cat2_contactos" rows="2"
-                                    placeholder="Nombres o emails de familia y amigos cercanos -con APELLIDO de ser posible-..."></textarea>
-                            </div><br>
-
-                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                                categoría?
-                            </p>
-
-                            <select name="cat2_modo" id="cat2_modo">
-                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                    por
-                                    mí y que AURhelios envíe el correo -respuesta automática-.</option>
-                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                    respuesta
-                                    y que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
-                                </option>
-                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                    "Borradores" para yo responderlo luego -emails no respondidos-.</option>
-                            </select>
-
-                            <label style="margin-top:15px; display: block; line-height: 1.4;">¿Con qué tono prefieres
-                                que
-                                <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> se dirija a tus seres
-                                queridos?
-                                <span
-                                    style="display: block; font-size: 15px; color: rgb(177, 172, 177); font-weight: normal; margin-top: 4px;">(Ej:
-                                    Cariñoso, breve, divertido).</span>
-                            </label>
-
-                            <textarea name="cat2_tono" id="cat2_tono" rows="1"></textarea>
-                        </div>
-                        <!--fin categoría 2 clonada-->
-
-                        <!-- Categoría 3 -->
-                        <div class="cat-box cat-box-3">
-                            <label><span class="cat-titulo-3">🟢 3_ Turnos Programados, Vencimientos y
-                                    Recordatorios</span></label>
-                            <p style="font-size: 0.92em; color: #1a5c1a; margin-bottom: 10px;">
-                                <em>A modo de ejemplo, puede incluir: citas médicas programadas, turno podología,
-                                    vencimientos
-                                    ordinarios
-                                    como
-                                    cuota del club, Netflix, Spotify, gimnasio y otras suscripciones de ocio,
-                                    etcétera.</em>
-                            </p>
-                            <p>Estos emails serán etiquetados como <span class="urgente-label"
-                                    style="color: #1a7a1a;">PRIORIDAD
-                                    ALTA</span>...</p>
-
-                            <div class="campo-personalizado">
-                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Hay vencimientos o
-                                    turnos
-                                    específicos que quieras destacar?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "vencimiento de la cuota del auto
-                                    el
-                                    día 10
-                                    de cada mes" — "turno semestral con el cardiólogo" — "renovación del seguro del auto
-                                    en
-                                    agosto"</span>
-                                <textarea name="cat3_personalizado" id="cat3_personalizado" rows="2"
-                                    placeholder="Describí vencimientos o turnos habituales de importancia para vos..."></textarea>
-                            </div><br>
-
-                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                                categoría?
-                            </p>
-                            <select name="cat3_modo" id="cat3_modo">
-                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                    por
-                                    mí y
-                                    que AURhelios envíe el correo -respuesta automática-.</option>
-                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                    respuesta
-                                    y
-                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
-                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                    "Borradores"
-                                    para yo responderlo luego -emails no respondidos-.</option>
-                            </select>
-                            <label style="margin-top:15px;">¿Con qué tono? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Conciso, breve,
-                                    formal).</span></label>
-                            <textarea name="cat3_tono" id="cat3_tono" rows="1"></textarea>
-                        </div>
-
-                        <!-- Categoría 4 -->
-                        <div class="cat-box cat-box-4">
-                            <label><span class="cat-titulo-4">🟢 4_ Relaciones laborales IMPOSTERGABLES</span></label>
-                            <p style="font-size: 0.92em; color: #1a5c1a; margin-bottom: 10px;">
-                                <em>Puede incluir: jefes, directivos, coordinadores de área, plazos de entrega, clientes
-                                    VIP,
-                                    interesados estratégicos (leads) a seguir, proveedores clave, etcétera.</em>
-                            </p>
-                            <p>Estos emails serán etiquetados como <span class="urgente-label"
-                                    style="color: #1a7a1a;">PRIORIDAD
-                                    ALTA</span>...</p>
-
-                            <div class="campo-personalizado">
-                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Quiénes son tus
-                                    directivos,
-                                    clientes VIP, proveedores clave, etcétera a tener en cuenta?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "gerente@empresa.com" — "cliente
-                                    Fernández
-                                    de FerStudio" — "proveedor de materiales Sr. López" — "directora Martínez"</span>
-                                <textarea name="cat4_personalizado" id="cat4_personalizado" rows="2"
-                                    placeholder="Nombres o emails de contactos clave para seguir de cerca..."></textarea>
+                                <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                    categoría?
+                                </p>
+                                <select name="cat3_modo" id="cat3_modo">
+                                    <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la
+                                        respuesta
+                                        por
+                                        mí y
+                                        que AURhelios envíe el correo -respuesta automática-.</option>
+                                    <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                        respuesta
+                                        y
+                                        que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                    </option>
+                                    <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                        "Borradores"
+                                        para yo responderlo luego -emails no respondidos-.</option>
+                                </select>
+                                <label style="margin-top:15px;">¿Con qué tono? <span
+                                        style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Conciso, breve,
+                                        formal).</span></label>
+                                <textarea name="cat3_tono" id="cat3_tono" rows="1"></textarea>
                             </div>
-                            <div class="campo-personalizado" style="margin-top: 10px;">
-                                <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Qué otros contactos
-                                    institucionales querés clasificar en esta sección?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "coordinador.sistemas@correo.com" —
-                                    "auditoría@estudio.com"</span>
-                                <textarea name="cat4_contactos" id="cat4_contactos" rows="2"
-                                    placeholder="Agrega otros remitentes corporativos o profesionales de peso..."></textarea>
-                            </div><br>
 
-                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                                categoría?
-                            </p>
-                            <select name="cat4_modo" id="cat4_modo">
-                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                    por
-                                    mí y
-                                    que AURhelios envíe el correo -respuesta automática-.</option>
-                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                    respuesta
-                                    y
-                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
-                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                    "Borradores"
-                                    para yo responderlo luego -emails no respondidos-.</option>
-                            </select>
-                            <label style="margin-top:15px;">¿Con qué tono? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Respetuoso, formal,
-                                    breve).</span></label>
-                            <textarea name="cat4_tono" id="cat4_tono" rows="1"></textarea>
-                        </div>
+                            <!-- Categoría 4 -->
+                            <div class="cat-box cat-box-4">
+                                <label><span class="cat-titulo-4">🟢 4_ Relaciones laborales
+                                        IMPOSTERGABLES</span></label>
+                                <p style="font-size: 0.92em; color: #1a5c1a; margin-bottom: 10px;">
+                                    <em>Puede incluir: jefes, directivos, coordinadores de área, plazos de entrega,
+                                        clientes
+                                        VIP,
+                                        interesados estratégicos (leads) a seguir, proveedores clave, etcétera.</em>
+                                </p>
+                                <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                        style="color: #1a7a1a;">PRIORIDAD
+                                        ALTA</span>...</p>
 
-                        <!-- Categoría 5 -->
-                        <div class="cat-box cat-box-5">
-                            <label><span class="cat-titulo-5">🟠 5_ Relaciones Laborales RUTINARIAS</span></label>
-                            <p style="font-size: 0.92em; color: #c6711b; margin-bottom: 10px;">
-                                <em>A modo de ejemplo, puedes incluir: compañeros, seguimiento de asignaciones,
-                                    proveedores
-                                    habituales,
-                                    reportes de estado, informes rutinarios.</em>
-                            </p>
-                            <p>Estos emails serán etiquetados como <span class="urgente-label"
-                                    style="color: #e67e22;">PRIORIDAD
-                                    MEDIA</span></p>
+                                <div class="campo-personalizado">
+                                    <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Quiénes son tus
+                                        directivos,
+                                        clientes VIP, proveedores clave, etcétera a tener en cuenta?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos: "gerente@empresa.com" —
+                                        "cliente
+                                        Fernández
+                                        de FerStudio" — "proveedor de materiales Sr. López" — "directora
+                                        Martínez"</span>
+                                    <textarea name="cat4_personalizado" id="cat4_personalizado" rows="2"
+                                        placeholder="Nombres o emails de contactos clave para seguir de cerca..."></textarea>
+                                </div>
+                                <div class="campo-personalizado" style="margin-top: 10px;">
+                                    <span class="campo-personalizado-titulo" style="color:#39893e">⭐ ¿Qué otros
+                                        contactos
+                                        institucionales querés clasificar en esta sección?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos:
+                                        "coordinador.sistemas@correo.com" —
+                                        "auditoría@estudio.com"</span>
+                                    <textarea name="cat4_contactos" id="cat4_contactos" rows="2"
+                                        placeholder="Agrega otros remitentes corporativos o profesionales de peso..."></textarea>
+                                </div><br>
 
-                            <div class="campo-personalizado">
-                                <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿Quiénes son tus
-                                    colegas de
-                                    equipo, clientes o proveedores de trato diario?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "Josefina, de Capital Humano" —
-                                    "cliente
-                                    Juan Fernández de FerStudio" — "proveedor de insumos Sr. López"</span>
-                                <textarea name="cat5_personalizado" id="cat5_personalizado" rows="2"
-                                    placeholder="Nombres o emails de tus contactos comerciales cotidianos..."></textarea>
+                                <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                    categoría?
+                                </p>
+                                <select name="cat4_modo" id="cat4_modo">
+                                    <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la
+                                        respuesta
+                                        por
+                                        mí y
+                                        que AURhelios envíe el correo -respuesta automática-.</option>
+                                    <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                        respuesta
+                                        y
+                                        que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                    </option>
+                                    <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                        "Borradores"
+                                        para yo responderlo luego -emails no respondidos-.</option>
+                                </select>
+                                <label style="margin-top:15px;">¿Con qué tono? <span
+                                        style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Respetuoso, formal,
+                                        breve).</span></label>
+                                <textarea name="cat4_tono" id="cat4_tono" rows="1"></textarea>
                             </div>
-                            <div class="campo-personalizado" style="margin-top: 10px;">
-                                <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿Qué otras cuentas o
-                                    firmas
-                                    deseas listar?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "facturacion@proveedor.com" —
-                                    "consultas@estudio.com"</span>
-                                <textarea name="cat5_contactos" id="cat5_contactos" rows="2"
-                                    placeholder="Agrega otras casillas de correo operativas habituales..."></textarea>
-                            </div><br>
 
-                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                                categoría?
-                            </p>
-                            <select name="cat5_modo" id="cat5_modo">
-                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                    por
-                                    mí y
-                                    que AURhelios envíe el correo -respuesta automática-.</option>
-                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                    respuesta
-                                    and
-                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
-                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                    "Borradores"
-                                    para yo responderlo luego -emails no respondidos-.</option>
-                            </select>
-                            <label style="margin-top:15px;">¿Con qué tono? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Cordial,
-                                    corporativo).</span></label>
-                            <textarea name="cat5_tono" id="cat5_tono" rows="1"></textarea>
-                        </div>
+                            <!-- Categoría 5 -->
+                            <div class="cat-box cat-box-5">
+                                <label><span class="cat-titulo-5">🟠 5_ Relaciones Laborales RUTINARIAS</span></label>
+                                <p style="font-size: 0.92em; color: #c6711b; margin-bottom: 10px;">
+                                    <em>A modo de ejemplo, puedes incluir: compañeros, seguimiento de asignaciones,
+                                        proveedores
+                                        habituales,
+                                        reportes de estado, informes rutinarios.</em>
+                                </p>
+                                <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                        style="color: #e67e22;">PRIORIDAD
+                                        MEDIA</span></p>
 
-                        <!-- Categoría 6 -->
-                        <div class="cat-box cat-box-6">
-                            <label><span class="cat-titulo-6">🟠 6_ Contenido de Valor / Cursos de
-                                    Interés</span></label>
-                            <p style="font-size: 0.92em; color: #c6711b; margin-bottom: 10px;">
-                                <em>Podría incluir, por ejemplo: material de estudio, capacitación complementaria,
-                                    newsletters
-                                    educativas, boletines de valor real.</em>
-                            </p>
-                            <p>Estos emails serán etiquetados como <span class="urgente-label"
-                                    style="color: #e67e22;">PRIORIDAD
-                                    MEDIA</span></p>
+                                <div class="campo-personalizado">
+                                    <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿Quiénes son tus
+                                        colegas de
+                                        equipo, clientes o proveedores de trato diario?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos: "Josefina, de Capital Humano" —
+                                        "cliente
+                                        Juan Fernández de FerStudio" — "proveedor de insumos Sr. López"</span>
+                                    <textarea name="cat5_personalizado" id="cat5_personalizado" rows="2"
+                                        placeholder="Nombres o emails de tus contactos comerciales cotidianos..."></textarea>
+                                </div>
+                                <div class="campo-personalizado" style="margin-top: 10px;">
+                                    <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿Qué otras cuentas
+                                        o
+                                        firmas
+                                        deseas listar?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos: "facturacion@proveedor.com" —
+                                        "consultas@estudio.com"</span>
+                                    <textarea name="cat5_contactos" id="cat5_contactos" rows="2"
+                                        placeholder="Agrega otras casillas de correo operativas habituales..."></textarea>
+                                </div><br>
 
-                            <div class="campo-personalizado">
-                                <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿De qué instituciones o
-                                    personas estás esperando información y/o documentación?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "Tutoriales de Adrián Saenz" —
-                                    "Alianza
-                                    Francesa" — "PDF Libro Historia Comparada I" — "Taller de Cocina"</span>
-                                <textarea name="cat6_personalizado" id="cat6_personalizado" rows="2"
-                                    placeholder="Agrega el material esperado, nombres o emails de tu interés..."></textarea>
-                            </div><br>
+                                <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                    categoría?
+                                </p>
+                                <select name="cat5_modo" id="cat5_modo">
+                                    <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la
+                                        respuesta
+                                        por
+                                        mí y
+                                        que AURhelios envíe el correo -respuesta automática-.</option>
+                                    <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                        respuesta
+                                        and
+                                        que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                    </option>
+                                    <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                        "Borradores"
+                                        para yo responderlo luego -emails no respondidos-.</option>
+                                </select>
+                                <label style="margin-top:15px;">¿Con qué tono? <span
+                                        style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Cordial,
+                                        corporativo).</span></label>
+                                <textarea name="cat5_tono" id="cat5_tono" rows="1"></textarea>
+                            </div>
 
-                            <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                                categoría?
-                            </p>
-                            <select name="cat6_modo" id="cat6_modo">
-                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                    por
-                                    mí y
-                                    que AURhelios envíe el correo -respuesta automática-.</option>
-                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                    respuesta
-                                    y
-                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
-                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                    "Borradores"
-                                    para yo responderlo luego -emails no respondidos-.</option>
-                            </select>
-                            <label style="margin-top:15px;">¿Con qué tono? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Interés,
-                                    agradecimiento).</span></label>
-                            <textarea name="cat6_tono" id="cat6_tono" rows="1"></textarea>
-                        </div>
+                            <!-- Categoría 6 -->
+                            <div class="cat-box cat-box-6">
+                                <label><span class="cat-titulo-6">🟠 6_ Contenido de Valor / Cursos de
+                                        Interés</span></label>
+                                <p style="font-size: 0.92em; color: #c6711b; margin-bottom: 10px;">
+                                    <em>Podría incluir, por ejemplo: material de estudio, capacitación complementaria,
+                                        newsletters
+                                        educativas, boletines de valor real.</em>
+                                </p>
+                                <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                        style="color: #e67e22;">PRIORIDAD
+                                        MEDIA</span></p>
 
-                        <!-- Categorías 7, 8, 9 -->
-                        <div id="contenedor-cat7" class="cat-box cat-box-7">
-                            <label><span class="cat-titulo-7">🔵 7_ Personas Lejanas o Desconocidas</span></label>
-                            <p style="font-size: 0.92em; color: #1a3d7a; margin-bottom: 10px;"><em>Contactos sin
-                                    referencia
-                                    clara.</em></p>
-                            <p style="font-size: 1.1em; color: #1a3d7a; margin-bottom: 20px;">(Esta categoría se
-                                habilita si
-                                eliges responder el Cuestionario modalidad
-                                <STRONG>INTEGRAL</STRONG>).
-                            </p>
-                            <p>Estos emails serán etiquetados como <span class="urgente-label"
-                                    style="color: #3498db;">PRIORIDAD
-                                    BAJA</span><br><br> ¿Cómo prefieres que <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                                categoría?
-                            </p>
-                            <select name="cat7_modo" id="cat7_modo">
-                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                    por
-                                    mí y
-                                    que AURhelios envíe el correo -respuesta automática-.</option>
-                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                    respuesta
-                                    y
-                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
-                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                    "Borradores"
-                                    para yo responderlo luego -emails no respondidos-.</option>
-                            </select>
-                            <label style="margin-top:15px;">¿Con qué tono? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Interés, pidiendo mayor
-                                    información).</span></label>
-                            <textarea name="cat7_tono" id="cat7_tono" rows="1"></textarea>
-                        </div>
+                                <div class="campo-personalizado">
+                                    <span class="campo-personalizado-titulo" style="color:#e67e22">⭐ ¿De qué
+                                        instituciones o
+                                        personas estás esperando información y/o documentación?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos: "Tutoriales de Adrián Saenz" —
+                                        "Alianza
+                                        Francesa" — "PDF Libro Historia Comparada I" — "Taller de Cocina"</span>
+                                    <textarea name="cat6_personalizado" id="cat6_personalizado" rows="2"
+                                        placeholder="Agrega el material esperado, nombres o emails de tu interés..."></textarea>
+                                </div><br>
 
-                        <div class="cat-box cat-box-8">
-                            <label><span class="cat-titulo-8">🔵 8_ Publicidad / Comerciales</span></label>
-                            <p style="font-size: 0.92em; color: #1a3d7a; margin-bottom: 10px;"><em>Newsletters masivos,
-                                    ofertas,
-                                    promociones de tiendas, publicidad identificable.</em></p>
-                            <p>Estos emails serán etiquetados como <span class="urgente-label"
-                                    style="color: #3498db;">PRIORIDAD
-                                    BAJA</span><br><br> ¿Cómo prefieres que <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
-                                categoría?
-                            </p>
-                            <select name="cat8_modo" id="cat8_modo">
-                                <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la respuesta
-                                    por
-                                    mí y
-                                    que AURhelios envíe el correo -respuesta automática-.</option>
-                                <option value="revision" selected style="color: green;">2) Que AURelia redacte una
-                                    respuesta
-                                    y
-                                    que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.</option>
-                                <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
-                                    "Borradores"
-                                    para yo responderlo luego -emails no respondidos-.</option>
-                            </select>
-                            <label style="margin-top:15px;">¿Con qué tono? <span
-                                    style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Neutral,
-                                    ignorar).</span></label>
-                            <textarea name="cat8_tono" id="cat8_tono" rows="1"></textarea>
-                        </div>
+                                <p>¿Cómo prefieres que <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                    categoría?
+                                </p>
+                                <select name="cat6_modo" id="cat6_modo">
+                                    <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la
+                                        respuesta
+                                        por
+                                        mí y
+                                        que AURhelios envíe el correo -respuesta automática-.</option>
+                                    <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                        respuesta
+                                        y
+                                        que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                    </option>
+                                    <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                        "Borradores"
+                                        para yo responderlo luego -emails no respondidos-.</option>
+                                </select>
+                                <label style="margin-top:15px;">¿Con qué tono? <span
+                                        style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Interés,
+                                        agradecimiento).</span></label>
+                                <textarea name="cat6_tono" id="cat6_tono" rows="1"></textarea>
+                            </div>
 
-                        <div class="cat-box cat-box-9">
-                            <label><span class="cat-titulo-9">🔴 9_ Spam y Basura</span></label>
-                            <p style="font-size: 0.92em; color: #6b0000; margin-bottom: 10px;">
-                                <em>Correos con contenido malicioso, phishing, estafas, publicidad agresiva, personas de
-                                    quienes
-                                    ya no te interesa recibir correspondencia.<br> AURhelios puede archivar o eliminar
-                                    estos
-                                    correos sin notificarte.</em>
-                            </p>
-                            <p>¿Cómo quieres que proceda <span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span> con estos correos?</p>
-                            <select name="cat9_modo" id="cat9_modo">
-                                <option value="no_deseado" style="color: blue;">1) Que los envíe a "Correo no deseado"
-                                    para
-                                    mi
-                                    revisión</option>
-                                <option value="eliminar" style="color: red;">2) Que los elimine definitivamente</option>
-                            </select>
+                            <!-- Categorías 7, 8, 9 -->
+                            <div id="contenedor-cat7" class="cat-box cat-box-7">
+                                <label><span class="cat-titulo-7">🔵 7_ Personas Lejanas o Desconocidas</span></label>
+                                <p style="font-size: 0.92em; color: #1a3d7a; margin-bottom: 10px;"><em>Contactos sin
+                                        referencia
+                                        clara.</em></p>
+                                <p style="font-size: 1.1em; color: #1a3d7a; margin-bottom: 20px;">(Esta categoría se
+                                    habilita si
+                                    eliges responder el Cuestionario modalidad
+                                    <STRONG>INTEGRAL</STRONG>).
+                                </p>
+                                <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                        style="color: #3498db;">PRIORIDAD
+                                        BAJA</span><br><br> ¿Cómo prefieres que <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                    categoría?
+                                </p>
+                                <select name="cat7_modo" id="cat7_modo">
+                                    <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la
+                                        respuesta
+                                        por
+                                        mí y
+                                        que AURhelios envíe el correo -respuesta automática-.</option>
+                                    <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                        respuesta
+                                        y
+                                        que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                    </option>
+                                    <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                        "Borradores"
+                                        para yo responderlo luego -emails no respondidos-.</option>
+                                </select>
+                                <label style="margin-top:15px;">¿Con qué tono? <span
+                                        style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Interés, pidiendo mayor
+                                        información).</span></label>
+                                <textarea name="cat7_tono" id="cat7_tono" rows="1"></textarea>
+                            </div>
 
-                            <div class="campo-personalizado" style="margin-top: 15px;">
-                                <span class="campo-personalizado-titulo">⭐ ¿Hay remitentes o dominios que siempre
-                                    quisieras
-                                    bloquear?</span>
-                                <span class="campo-personalizado-ejemplos">Ejemplos: "noresponder@publicidad.com" —
-                                    "todo lo
-                                    de
-                                    @ofertas.net" — "emails de tal firma que me molestan" - "bloquear los mensajes de
-                                    Fulano
-                                    de
-                                    Tal"</span>
-                                <textarea name="cat9_bloqueados" id="cat9_bloqueados" rows="2"
-                                    placeholder="Remitentes o dominios que siempre deben ir a spam..."></textarea>
+                            <div class="cat-box cat-box-8">
+                                <label><span class="cat-titulo-8">🔵 8_ Publicidad / Comerciales</span></label>
+                                <p style="font-size: 0.92em; color: #1a3d7a; margin-bottom: 10px;"><em>Newsletters
+                                        masivos,
+                                        ofertas,
+                                        promociones de tiendas, publicidad identificable.</em></p>
+                                <p>Estos emails serán etiquetados como <span class="urgente-label"
+                                        style="color: #3498db;">PRIORIDAD
+                                        BAJA</span><br><br> ¿Cómo prefieres que <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">elia</span> y <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> te asistan en esta
+                                    categoría?
+                                </p>
+                                <select name="cat8_modo" id="cat8_modo">
+                                    <option value="automatica" style="color: #240fe7;">1) Que AURelia redacte la
+                                        respuesta
+                                        por
+                                        mí y
+                                        que AURhelios envíe el correo -respuesta automática-.</option>
+                                    <option value="revision" selected style="color: green;">2) Que AURelia redacte una
+                                        respuesta
+                                        y
+                                        que AURhelios la deje en "Borradores" para mi aprobación -revisión previa-.
+                                    </option>
+                                    <option value="archivo" style="color: orange;">3) Que AURhelios guarde el correo en
+                                        "Borradores"
+                                        para yo responderlo luego -emails no respondidos-.</option>
+                                </select>
+                                <label style="margin-top:15px;">¿Con qué tono? <span
+                                        style="font-size: 17px; color: rgb(177, 172, 177);">(Ej: Neutral,
+                                        ignorar).</span></label>
+                                <textarea name="cat8_tono" id="cat8_tono" rows="1"></textarea>
+                            </div>
+
+                            <div class="cat-box cat-box-9">
+                                <label><span class="cat-titulo-9">🔴 9_ Spam y Basura</span></label>
+                                <p style="font-size: 0.92em; color: #6b0000; margin-bottom: 10px;">
+                                    <em>Correos con contenido malicioso, phishing, estafas, publicidad agresiva,
+                                        personas de
+                                        quienes
+                                        ya no te interesa recibir correspondencia.<br> AURhelios puede archivar o
+                                        eliminar
+                                        estos
+                                        correos sin notificarte.</em>
+                                </p>
+                                <p>¿Cómo quieres que proceda <span
+                                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                        style="color: #4A7BA7; font-weight: bold;">helios</span> con estos correos?</p>
+                                <select name="cat9_modo" id="cat9_modo">
+                                    <option value="no_deseado" style="color: blue;">1) Que los envíe a "Correo no
+                                        deseado"
+                                        para
+                                        mi
+                                        revisión</option>
+                                    <option value="eliminar" style="color: red;">2) Que los elimine definitivamente
+                                    </option>
+                                </select>
+
+                                <div class="campo-personalizado" style="margin-top: 15px;">
+                                    <span class="campo-personalizado-titulo">⭐ ¿Hay remitentes o dominios que siempre
+                                        quisieras
+                                        bloquear?</span>
+                                    <span class="campo-personalizado-ejemplos">Ejemplos: "noresponder@publicidad.com" —
+                                        "todo lo
+                                        de
+                                        @ofertas.net" — "emails de tal firma que me molestan" - "bloquear los mensajes
+                                        de
+                                        Fulano
+                                        de
+                                        Tal"</span>
+                                    <textarea name="cat9_bloqueados" id="cat9_bloqueados" rows="2"
+                                        placeholder="Remitentes o dominios que siempre deben ir a spam..."></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- 
+                </div>
+                <!-- 
                             <input type="checkbox" name="interes_futuro" value="agenda_turnos">
                             <label>Gestión inteligente de agenda y turnos</label>
 
                             <input type="checkbox" name="interes_futuro" value="confirmacion_citas">
                             <label>Confirmación automática de citas y reuniones</label>
                 -->
-                    <!-- SECCIÓN CANALES ADICIONALES -->
-                    <div class="seccion-adicional">
-                        <h3 class="titulo-centrado">Tus canales de comunicación</h3>
-                        <p style="color: #005f80; margin-bottom: 25px; font-size: 0.95em;">
-                            Además del reporte diario por email, <span
+                <!-- SECCIÓN CANALES ADICIONALES -->
+                <div class="seccion-adicional">
+                    <h3 class="titulo-centrado">Tus canales de comunicación</h3>
+                    <p style="color: #005f80; margin-bottom: 25px; font-size: 0.95em;">
+                        Además del reporte diario por email, <span
+                            style="color: #F5A623; font-weight: bold;">AUR</span><span
+                            style="color: #4A7BA7; font-weight: bold;">+IA</span> puede enviarte alertas
+                        urgentes y
+                        reportes
+                        por <strong>WhatsApp</strong> y <strong>Telegram</strong> (servicio diferencial a muy
+                        bajo
+                        costo).<br> Completa este campo si ya cuentas con alguno de estos canales o si te
+                        interesa
+                        activarlos
+                        en el futuro.
+                    </p>
+
+                    <div class="campo-grupo">
+                        <label style="font-size: 1rem; font-weight: 700; color: #005f80;">📲 ¿Tienes
+                            <strong>Telegram</strong>?</label>
+                        <p
+                            style="font-size: 0.88em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px; margin-bottom: 10px;">
+                            Ejemplo: "Sí, mi usuario es @tunombre" — "Sí, pero no sé mi usuario" — "No tengo
+                            Telegram"
+                        </p>
+                        <textarea name="tiene_telegram" id="tiene_telegram" rows="1"
+                            style="font-size: 0.95rem; border: 1px solid #0099cc;"
+                            placeholder="Escribe AQUÍ tu usuario o número"></textarea>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label style="font-size: 1rem; font-weight: 700; color: #005f80;">💬 ¿Usás
+                            <strong>WhatsApp</strong>
+                            y te interesaría recibir reportes por esta vía?</label>
+                        <p
+                            style="font-size: 0.88em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px; margin-bottom: 10px;">
+                            Como seguramente el número de WhatsApp ya lo ingresaste arriba, aquí solo indícanos
+                            tu
+                            preferencia.<br> Ejemplo: "Sí, prefiero WhatsApp" — "No, prefiero email" — "Me da
+                            igual"
+                        </p>
+                        <textarea name="preferencia_whatsapp" id="preferencia_whatsapp" rows="1"
+                            style="font-size: 0.95rem; border: 1px solid #0099cc;"
+                            placeholder="¿Qué prefieres?"></textarea>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN JUBILADO -->
+                <div class="seccion-jubilado">
+                    <h3>¿Sos jubilad@ o pensionad@?</h3>
+                    <p style="color: #5a3d7a; margin-bottom: 20px; font-size: 0.95em;">Si formas parte de este
+                        sector,
+                        <span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                            style="color: #4A7BA7; font-weight: bold;">+IA</span> tiene un <strong>Plan Especial
+                            Gratuito</strong> para ti: podrás recibir <strong>tres reportes diarios
+                            por
+                            Telegram</strong> (09:00 hs / 13:00 hs / 18:00 hs ⬅️ en este horario si recibieras
+                        mensajes
+                        URGENTES).<br> Si
+                        marcas
+                        que
+                        "sí", te contactaremos para activarlo.
+                    </p>
+                    <div class="campo-grupo">
+                        <label style="font-size: 1rem; font-weight: 700; color: var(--cat1-color);">¿Cuál es tu
+                            situación?</label>
+                        <select name="es_jubilado" id="es_jubilado"
+                            style="font-size: 1rem; border: 2px solid var(--cat1-border); background: #fdf8ff;">
+                            <option value="no" selected>No, no soy jubilado/a</option>
+                            <option value="si">Sí, soy jubilado/a o pensionado/a</option>
+                            <option value="proximo">Próximamente me jubilo</option>
+                        </select>
+                    </div>
+                    <div class="campo-grupo">
+                        <label style="font-size: 0.95rem; font-weight: 600; color: var(--cat1-color);">¿Tienes
+                            algún
+                            comentario
+                            adicional? <span
+                                style="font-size: 0.85rem; color: var(--campo-nuevo-texto); font-style: italic;">(no
+                                es
+                                obligatorio)</span></label>
+                        <p
+                            style="font-size: 0.85em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px;">
+                            Ejemplo: "Tengo 70 años y me cuesta la tecnología" — "Mi familia me ayuda con el
+                            celular"
+                        </p>
+                        <textarea name="jubilado_comentario" id="jubilado_comentario" rows="2"
+                            style="font-size: 0.95rem; border: 1px solid var(--cat1-border);" placeholder=""></textarea>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="../email_04_con_Cuestionario_VyO.html"
+                        style="color: #4A7BA7; text-decoration: underline; font-size: 22px;">
+                        <strong>Si tienes dudas sobre algún punto de la configuración o si necesitas volver a
+                            revisarlo,
+                            regresa al instructivo desde aquí</strong><br><br><br>
+                    </a>
+                </div>
+
+                <!-- ===================================================== -->
+                <!-- Biblioteca de Conocimiento (Modo MANUAL) -->
+                <!-- ===================================================== -->
+
+                <div id="bloque-conocimiento-manual" class="bloque-conocimiento-manual">
+
+                    <h2>Lo que quiero que <i><span style="color: #F5A623; font-weight: bold;">AUR</span><span
+                                style="color: #4A7BA7; font-weight: bold;">elia</span></i> y <i><span
                                 style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                style="color: #4A7BA7; font-weight: bold;">+IA</span> puede enviarte alertas urgentes y
-                            reportes
-                            por <strong>WhatsApp</strong> y <strong>Telegram</strong> (servicio diferencial a muy bajo
-                            costo).<br> Completa este campo si ya cuentas con alguno de estos canales o si te interesa
-                            activarlos
-                            en el futuro.
-                        </p>
+                                style="color: #4A7BA7; font-weight: bold;">helios</span></i> recuerden de mí...
+                    </h2>
 
-                        <div class="campo-grupo">
-                            <label style="font-size: 1rem; font-weight: 700; color: #005f80;">📲 ¿Tienes
-                                <strong>Telegram</strong>?</label>
-                            <p
-                                style="font-size: 0.88em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px; margin-bottom: 10px;">
-                                Ejemplo: "Sí, mi usuario es @tunombre" — "Sí, pero no sé mi usuario" — "No tengo
-                                Telegram"
-                            </p>
-                            <textarea name="tiene_telegram" id="tiene_telegram" rows="1"
-                                style="font-size: 0.95rem; border: 1px solid #0099cc;"
-                                placeholder="Escribe AQUÍ tu usuario o número"></textarea>
-                        </div>
+                    <p class="intro-conocimiento">
 
-                        <div class="campo-grupo">
-                            <label style="font-size: 1rem; font-weight: 700; color: #005f80;">💬 ¿Usás
-                                <strong>WhatsApp</strong>
-                                y te interesaría recibir reportes por esta vía?</label>
-                            <p
-                                style="font-size: 0.88em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px; margin-bottom: 10px;">
-                                Como seguramente el número de WhatsApp ya lo ingresaste arriba, aquí solo indícanos tu
-                                preferencia.<br> Ejemplo: "Sí, prefiero WhatsApp" — "No, prefiero email" — "Me da igual"
-                            </p>
-                            <textarea name="preferencia_whatsapp" id="preferencia_whatsapp" rows="1"
-                                style="font-size: 0.95rem; border: 1px solid #0099cc;"
-                                placeholder="¿Qué prefieres?"></textarea>
-                        </div>
+                        Aquí puedes indicar criterios, preferencias, instrucciones o cualquier detalle que
+                        quieras
+                        que
+                        AURelia y AURhelios recuerden siempre sobre ti. Si deseas compartir documentos, puedes
+                        hacerlo
+                        en la Biblioteca de Archivos Personales.
+                    </p>
+                    <strong>Algunos ejemplos:</strong><br>
+                    + “Prefiero respuestas breves.”<br>
+                    + “Si dudás entre dos interpretaciones, preguntame antes de asumir.”<br>
+                    + “No hables de política salvo que yo lo pida.”<br>
+                    <p>
+
+                        <br><br>
+                    </p>
+
+                    <div class="campo-grupo">
+
+                        <textarea id="conocimiento_manual" name="conocimiento_manual" rows="4"
+                            placeholder="Escribe aquí aquello que quieres que AURelia y AURhelios recuerden sobre ti..."></textarea>
+
                     </div>
 
-                    <!-- SECCIÓN JUBILADO -->
-                    <div class="seccion-jubilado">
-                        <h3>¿Sos jubilad@ o pensionad@?</h3>
-                        <p style="color: #5a3d7a; margin-bottom: 20px; font-size: 0.95em;">Si formas parte de este
-                            sector,
-                            <span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                style="color: #4A7BA7; font-weight: bold;">+IA</span> tiene un <strong>Plan Especial
-                                Gratuito</strong> para ti: podrás recibir <strong>tres reportes diarios
-                                por
-                                Telegram</strong> (09:00 hs / 13:00 hs / 18:00 hs ⬅️ en este horario si recibieras
-                            mensajes
-                            URGENTES).<br> Si
-                            marcas
-                            que
-                            "sí", te contactaremos para activarlo.
-                        </p>
-                        <div class="campo-grupo">
-                            <label style="font-size: 1rem; font-weight: 700; color: var(--cat1-color);">¿Cuál es tu
-                                situación?</label>
-                            <select name="es_jubilado" id="es_jubilado"
-                                style="font-size: 1rem; border: 2px solid var(--cat1-border); background: #fdf8ff;">
-                                <option value="no" selected>No, no soy jubilado/a</option>
-                                <option value="si">Sí, soy jubilado/a o pensionado/a</option>
-                                <option value="proximo">Próximamente me jubilo</option>
-                            </select>
-                        </div>
-                        <div class="campo-grupo">
-                            <label style="font-size: 0.95rem; font-weight: 600; color: var(--cat1-color);">¿Tienes algún
-                                comentario
-                                adicional? <span
-                                    style="font-size: 0.85rem; color: var(--campo-nuevo-texto); font-style: italic;">(no
-                                    es
-                                    obligatorio)</span></label>
-                            <p
-                                style="font-size: 0.85em; color: var(--campo-nuevo-texto); font-style: italic; margin-top: -5px;">
-                                Ejemplo: "Tengo 70 años y me cuesta la tecnología" — "Mi familia me ayuda con el
-                                celular"
-                            </p>
-                            <textarea name="jubilado_comentario" id="jubilado_comentario" rows="2"
-                                style="font-size: 0.95rem; border: 1px solid var(--cat1-border);"
-                                placeholder=""></textarea>
-                        </div>
-                    </div>
+                    <div class="campo-grupo">
 
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="../email_04_con_Cuestionario_VyO.html"
-                            style="color: #4A7BA7; text-decoration: underline; font-size: 22px;">
-                            <strong>Si tienes dudas sobre algún punto de la configuración o si necesitas volver a
-                                revisarlo,
-                                regresa al instructivo desde aquí</strong><br><br><br>
-                        </a>
-                    </div>
+                        <label>
 
-                    <!-- ===================================================== -->
-                    <!-- Biblioteca de Conocimiento (Modo MANUAL) -->
-                    <!-- ===================================================== -->
+                            📚 Biblioteca de ARCHIVOS PERSONALES
 
-                    <div id="bloque-conocimiento-manual" class="bloque-conocimiento-manual">
+                        </label>
 
-                        <h2>Lo que quiero que <i><span style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">elia</span></i> y <i><span
-                                    style="color: #F5A623; font-weight: bold;">AUR</span><span
-                                    style="color: #4A7BA7; font-weight: bold;">helios</span></i> recuerden de mí...</h2>
+                        <input type="file" id="biblioteca_manual" multiple>
 
-                        <p class="intro-conocimiento">
+                        <div id="mensaje-biblioteca" class="mensaje-biblioteca" style="display:none;"></div>
 
-                            Aquí puedes indicar criterios, preferencias, instrucciones o cualquier detalle que quieras
-                            que
-                            AURelia y AURhelios recuerden siempre sobre ti. Si deseas compartir documentos, puedes
-                            hacerlo
-                            en la Biblioteca de Archivos Personales.
-                        </p>
-                        <strong>Algunos ejemplos:</strong><br>
-                        + “Prefiero respuestas breves.”<br>
-                        + “Si dudás entre dos interpretaciones, preguntame antes de asumir.”<br>
-                        + “No hables de política salvo que yo lo pida.”<br>
-                        <p>
+                        <input type="text" id="buscador-biblioteca" placeholder="🔍 Buscar archivo..."
+                            oninput="mostrarBibliotecaExistente(bibliotecaServidor)">
 
-                            <br><br>
-                        </p>
+                        <!-- Comienzo ORDENADOR -->
 
-                        <div class="campo-grupo">
+                        <div class="controles-biblioteca">
 
-                            <textarea id="conocimiento_manual" name="conocimiento_manual" rows="4"
-                                placeholder="Escribe aquí aquello que quieres que AURelia y AURhelios recuerden sobre ti..."></textarea>
-
-                        </div>
-
-                        <div class="campo-grupo">
-
-                            <label>
-
-                                📚 Biblioteca de ARCHIVOS PERSONALES
-
+                            <label for="orden-biblioteca">
+                                Ordenar por:
                             </label>
 
-                            <input type="file" id="biblioteca_manual" multiple>
+                            <select id="orden-biblioteca" onchange="mostrarBibliotecaExistente(bibliotecaServidor)">
 
-                            <div id="mensaje-biblioteca" class="mensaje-biblioteca" style="display:none;"></div>
+                                <option value="fecha">🕒 Más recientes</option>
+                                <option value="nombre">🔤 Nombre (A-Z)</option>
 
-                            <input type="text" id="buscador-biblioteca" placeholder="🔍 Buscar archivo..."
-                                oninput="mostrarBibliotecaExistente(bibliotecaServidor)">
-
-                            <!-- Comienzo ORDENADOR -->
-
-                            <div class="controles-biblioteca">
-
-                                <label for="orden-biblioteca">
-                                    Ordenar por:
-                                </label>
-
-                                <select id="orden-biblioteca" onchange="mostrarBibliotecaExistente(bibliotecaServidor)">
-
-                                    <option value="fecha">🕒 Más recientes</option>
-                                    <option value="nombre">🔤 Nombre (A-Z)</option>
-
-                                </select>
-
-                            </div>
-
-                            <!-- FIN ORDENADOR -->
-
-                            <div id="lista-archivos-manual" class="lista-archivos-manual">
-
-                            </div>
-
-                            <!-- COMIENZO PAGINACIÓN -->
-
-                            <div id="paginacion-biblioteca" class="paginacion-biblioteca">
-
-                                <button id="btn-pagina-anterior" type="button">
-                                    ◀ Anterior
-                                </button>
-
-                                <span id="texto-paginacion">
-                                    Página 1 de 1
-                                </span>
-
-                                <button id="btn-pagina-siguiente" type="button">
-                                    Siguiente ▶
-                                </button>
-
-                            </div>
-
-                            <!-- FIN PAGINACIÓN -->
-
-
-                            <h4>Archivos preparados para subir</h4>
-
-                            <div id="lista-archivos-pendientes" class="lista-archivos-manual">
-                            </div>
-
-                            <small>
-
-                                Puedes incorporar documentos,
-                                imágenes, libros, contratos,
-                                reglamentos, notas, fotografías,
-                                artículos y cualquier otro material.
-
-                            </small>
+                            </select>
 
                         </div>
 
+                        <!-- FIN ORDENADOR -->
+
+                        <div id="lista-archivos-manual" class="lista-archivos-manual">
+
+                        </div>
+
+                        <!-- COMIENZO PAGINACIÓN -->
+
+                        <div id="paginacion-biblioteca" class="paginacion-biblioteca">
+
+                            <button id="btn-pagina-anterior" type="button">
+                                ◀ Anterior
+                            </button>
+
+                            <span id="texto-paginacion">
+                                Página 1 de 1
+                            </span>
+
+                            <button id="btn-pagina-siguiente" type="button">
+                                Siguiente ▶
+                            </button>
+
+                        </div>
+
+                        <!-- FIN PAGINACIÓN -->
+
+
+                        <h4>Archivos preparados para subir</h4>
+
+                        <div id="lista-archivos-pendientes" class="lista-archivos-manual">
+                        </div>
+
+                        <small>
+
+                            Puedes incorporar documentos,
+                            imágenes, libros, contratos,
+                            reglamentos, notas, fotografías,
+                            artículos y cualquier otro material.
+
+                        </small>
+
                     </div>
 
-                    <button type="submit" class="btn-submit" id="submit-btn">Enviar mi <span
-                            style="color: #F5A623; font-weight: bold;">V</span><span
-                            style="color: #99e0f6; font-weight: bold;">y</span><span
-                            style="color: #F5A623; font-weight: bold;">O</span> a <span
-                            style="color: #F5A623; font-weight: bold;">AUR</span><span
-                            style="color: #99e0f6; font-weight: bold;">+IA</span></button>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submit-btn">Enviar mi <span
+                        style="color: #F5A623; font-weight: bold;">V</span><span
+                        style="color: #99e0f6; font-weight: bold;">y</span><span
+                        style="color: #F5A623; font-weight: bold;">O</span> a <span
+                        style="color: #F5A623; font-weight: bold;">AUR</span><span
+                        style="color: #99e0f6; font-weight: bold;">+IA</span></button>
 
 
-                    <div id="vyo-alert-box"
-                        style="display: none; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 25px; font-weight: 600; font-size: 1.1rem; line-height: 1.5; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: all 0.3s ease-in-out;">
-                    </div>
+                <div id="vyo-alert-box"
+                    style="display: none; padding: 20px; border-radius: 8px; margin-top: 20px; margin-bottom: 25px; font-weight: 600; font-size: 1.1rem; line-height: 1.5; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.06); transition: all 0.3s ease-in-out;">
+                </div>
             </form>
         </div>
 
@@ -2662,15 +2765,21 @@
             document.getElementById('form-vyo').dataset.flujo = tipo.toUpperCase();
         }
 
-        // Inicializar por defecto en Modo Profesional
+        // Inicializar por defecto en Modo Profesional y configurar listeners
         document.addEventListener('DOMContentLoaded', () => {
             setFlujo('profesional');
+
+            // ➔ Sanitización automática para el Código de Usuario (USU)
+            const inputUSU = document.getElementById("codigo_usu");
+            if (inputUSU) {
+                inputUSU.addEventListener("input", function () {
+                    this.value = this.value.toUpperCase().replace(/\s+/g, '');
+                });
+            }
         });
 
         function mostrarModalExito() {
-
             document.getElementById("modal-exito").style.display = "flex";
-
         }
 
         function cerrarModalExito() {
@@ -2838,11 +2947,28 @@
             const bloqueInstructivo = document.getElementById("bloque-instructivo-imap");
             const bloqueCuestionario = document.getElementById("bloque-cuestionario");
 
-            // 2. Obtener elementos de control (Badge y Llave)
+            // OBTENER EL CONTENEDOR DE LAS 9 CATEGORÍAS
+            const seccionCategorias = document.getElementById("seccion-categorias");
+
+            // 2. Obtener elementos de control (Badge, Llave y Email)
             const barraModo = document.getElementById("barra-modo");
             if (barraModo) barraModo.style.display = "none";
             const bloqueClave = document.getElementById("bloque-llave-conexion");
             const inputClave = document.querySelector('input[name="clave_aplicacion"]') || document.getElementById('llave-conexion');
+
+            const bloqueEmail = document.getElementById("bloque-email");
+            const inputEmail = document.getElementById("email");
+
+            // ➔ Limpieza automática de espacios para la Llave de Conexión
+            if (inputClave) {
+                inputClave.addEventListener("blur", function () {
+                    this.value = this.value.replace(/\s+/g, '');
+                });
+
+                inputClave.addEventListener("input", function () {
+                    this.value = this.value.replace(/\s+/g, '');
+                });
+            }
 
             // ════════════════════════════════════════════════
             // CAMINO 1: MODO MANUAL
@@ -2850,24 +2976,32 @@
             if (modo === 'manual') {
                 // Muestra el Cuestionario directamente
                 if (pantallaInicial) pantallaInicial.style.display = "none";
-
                 if (bloqueCuestionario) bloqueCuestionario.style.display = "block";
                 if (bloqueInstructivo) bloqueInstructivo.style.display = "none";
 
-
+                // 🟢 AQUÍ: OCULTA LAS 9 CATEGORÍAS EN MODO MANUAL
+                if (seccionCategorias) seccionCategorias.style.display = "none";
 
                 // Configura Badge Dorado (Claudio UX)
                 mostrarBadge("manual");
 
-                // BLOQUEA y atenuá el campo de Llave de Conexión
-                if (bloqueClave) {
-                    bloqueClave.style.opacity = "0.4";
-                    bloqueClave.style.pointerEvents = "none";
-                }
+                // OCULTA completamente la Llave de Conexión
+                const textoClave = document.getElementById("texto-llave-conexion");
+                if (textoClave) textoClave.style.display = "none";
+                if (bloqueClave) bloqueClave.style.display = "none";
+
                 if (inputClave) {
                     inputClave.disabled = true;
                     inputClave.removeAttribute("required");
                     inputClave.value = ""; // Limpia el valor por seguridad
+                }
+
+                // OCULTA completamente el bloque de Email
+                if (bloqueEmail) bloqueEmail.style.display = "none";
+                if (inputEmail) {
+                    inputEmail.disabled = true;
+                    inputEmail.removeAttribute("required");
+                    inputEmail.value = "";
                 }
 
                 // ════════════════════════════════════════════════
@@ -2879,17 +3013,31 @@
                 if (bloqueCuestionario) bloqueCuestionario.style.display = "none";
                 if (bloqueInstructivo) bloqueInstructivo.style.display = "block";
 
+                // 🟢 AQUÍ: MUESTRA LAS 9 CATEGORÍAS EN MODO AUTOMÁTICO
+                if (seccionCategorias) seccionCategorias.style.display = "block";
+
                 // Configura Badge Azul (Claudio UX)
                 mostrarBadge("automatico");
 
-                // DESBLOQUEA la Llave de Conexión para cuando pase al Cuestionario
+                // MUESTRA y DESBLOQUEA la Llave de Conexión
+                const textoClave = document.getElementById("texto-llave-conexion");
+                if (textoClave) textoClave.style.display = "block";
+
                 if (bloqueClave) {
+                    bloqueClave.style.display = "block";
                     bloqueClave.style.opacity = "1";
                     bloqueClave.style.pointerEvents = "auto";
                 }
                 if (inputClave) {
                     inputClave.disabled = false;
-                    inputClave.setAttribute("required", "true");
+                    inputClave.removeAttribute("required");
+                }
+
+                // MUESTRA y REQUIERE el bloque de Email
+                if (bloqueEmail) bloqueEmail.style.display = "block";
+                if (inputEmail) {
+                    inputEmail.disabled = false;
+                    inputEmail.setAttribute("required", "true");
                 }
             }
 
@@ -2916,14 +3064,18 @@
             mostrarBadge("automatico");
 
             // Activar la llave
+            const textoClave = document.getElementById("texto-llave-conexion");
+            if (textoClave) textoClave.style.display = "block";
+
             if (bloqueClave) {
+                bloqueClave.style.display = "block";
                 bloqueClave.style.opacity = "1";
                 bloqueClave.style.pointerEvents = "auto";
             }
 
             if (inputClave) {
                 inputClave.disabled = false;
-                inputClave.setAttribute("required", "true");
+                inputClave.removeAttribute("required");
             }
 
         }
@@ -2956,6 +3108,35 @@
 
             document.getElementById('btn-volver-global').style.display = 'none';
         }
+
+        function aplicarModoServicio(modo) {
+            const seccionCategorias = document.getElementById('seccion-categorias');
+            if (!seccionCategorias) return;
+
+            if (modo === 'MANUAL') {
+                seccionCategorias.style.display = 'none'; // Oculta solo las 9 categorías
+            } else {
+                seccionCategorias.style.display = 'block'; // Muestra todo en Modo Automático
+            }
+        }
+
+        // AUTO-EJECUCIÓN AL CARGAR LA PÁGINA
+        document.addEventListener('DOMContentLoaded', function () {
+            // Buscamos si la URL o el formulario indican que estamos en Modo MANUAL
+            const urlParams = new URLSearchParams(window.location.search);
+            const modoUrl = urlParams.get('modo'); // Por ejemplo: index.html?modo=MANUAL
+
+            // Si detecta 'MANUAL' en la URL o si quieres que por defecto sea MANUAL:
+            if (modoUrl === 'MANUAL' || document.body.classList.contains('modo-manual')) {
+                aplicarModoServicio('MANUAL');
+            } else {
+                // Si tienes un selector/botón principal en la página, leemos su valor:
+                const selectorGlobal = document.getElementById('modo_servicio') || document.getElementById('modo_servicio_global');
+                if (selectorGlobal) {
+                    aplicarModoServicio(selectorGlobal.value);
+                }
+            }
+        });
     </script>
 
 </body>
